@@ -1,2 +1,2 @@
-# leetcode
-Collection of LeetCode questions
+# leetcode/GFG 
+Collection of my LeetCode/GFG solns
