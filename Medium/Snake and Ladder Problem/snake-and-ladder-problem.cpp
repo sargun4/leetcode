@@ -1,10 +1,5 @@
-//{ Driver Code Starts
-// Initial Template for C++
-
 #include <bits/stdc++.h>
 using namespace std;
-
-// } Driver Code Ends
 class Solution{
 public:
     int minThrow(int n, int arr[]){
@@ -47,11 +42,6 @@ public:
         return p.second;
     }
 };
-
-
-
-//{ Driver Code Starts.
-
 int main(){
     int t;
     cin>>t;
@@ -61,10 +51,8 @@ int main(){
         int arr[2*N];
         for(int i = 0;i < 2*N;i++)
             cin>>arr[i];
-        
         Solution ob;
         cout<<ob.minThrow(N, arr)<<"\n";
     }
     return 0;
 }
-// } Driver Code Ends
