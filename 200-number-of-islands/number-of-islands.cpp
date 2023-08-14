@@ -24,7 +24,6 @@ public:
                                 grid[next_row][next_col] = '2';
                                 bfs_que.push(make_pair(next_row, next_col));
                             }
-                            
                         }
                     }
                 }   
