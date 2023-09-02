@@ -1,6 +1,6 @@
 // #include <bits/stdc++.h>
 // using namespace std;
-
+//O(n)
 // //memo
 // class Solution {
 // public:
@@ -34,7 +34,7 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-
+//O(n)
 //tab
 class Solution {
 public:
