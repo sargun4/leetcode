@@ -39,6 +39,8 @@ using namespace std;
 // //rec-O(2^n)
 
 
+
+// T-O(n),S-O(1)
 class Solution {
 public:  
     int fib(int n) {
