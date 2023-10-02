@@ -43,8 +43,6 @@ public:
         if(n==1) return nums[0];
         vector<int> t(n+1,0);
         //t[i]=money stolen when we hv traversed/been to i houses
-        
-    
         //case1-take 1st house-hence skip last house
         t[0]=0;
         for(int i=1;i<=n-1;i++){
@@ -54,8 +52,6 @@ public:
         }
         int res1=t[n-1];
         t.clear();
-
-
         //case1-skip 1st house-hence we can take last house
         t[0]=0,
         t[1]=0;//skip 1st house
@@ -65,7 +61,6 @@ public:
             t[i]=max(skip,take);
         }
         int res2=t[n];
-        
         return max(res1,res2);
         
     }
