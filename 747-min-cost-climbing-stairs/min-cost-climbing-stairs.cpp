@@ -1,3 +1,5 @@
+//1. Tabulation-Bottom Up 
+// T-O(n), S-O(n)
 #include <bits/stdc++.h>
 using namespace std;
 // vector<int> dp(1001,-1);
@@ -18,9 +20,12 @@ public:
     }
 };
 
+
+// 2.Memoization 
+// T-O(n), S-O(n)
 // #include <bits/stdc++.h>
 // using namespace std;
-// vector<int> dp(1001,-1);
+
 // class Solution {
 // public:
 //     int solve(vector<int> &cost,int n,vector<int> &dp){
