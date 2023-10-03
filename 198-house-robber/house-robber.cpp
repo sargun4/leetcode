@@ -1,5 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
+// const space-O(1)
+//time-O(n)
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int n=nums.size();
+        if(n==1) return nums[0];
+        int prevprev=0;
+        int prev=nums[0];
+        for(int i=2;i<=n;i++){
+            int steal=nums[i-1]+prevprev;
+            int skip=prev;
+            int temp=max(steal,skip);
+            prevprev=prev;
+            prev=temp;
+        }
+        return prev;
+    }
+};
 
 // //memo
 // class Solution {
@@ -22,22 +41,22 @@ using namespace std;
 // };
 
 //tab
-class Solution {
-public:
-    int rob(vector<int>& nums) {
-        int n=nums.size();
-        if(n==1) return nums[0];
-        vector<int> t(n+1,0);  //t[i]=max stolen money till house i
-        t[0]=0;//no house-no money
-        t[1]=nums[0];//1 house only
-        for(int i=2;i<=n;i++){
-            int steal=nums[i-1]+t[i-2];
-            int skip=t[i-1];
-            t[i]=max(steal,skip);
-        }
-        return t[n];
-    }
-};
+// class Solution {
+// public:
+//     int rob(vector<int>& nums) {
+//         int n=nums.size();
+//         if(n==1) return nums[0];
+//         vector<int> t(n+1,0);  //t[i]=max stolen money till house i
+//         t[0]=0;//no house-no money
+//         t[1]=nums[0];//1 house only
+//         for(int i=2;i<=n;i++){
+//             int steal=nums[i-1]+t[i-2];
+//             int skip=t[i-1];
+//             t[i]=max(steal,skip);
+//         }
+//         return t[n];
+//     }
+// };
 
 
 // // //memoization-top down-O(n)
