@@ -24,13 +24,12 @@ using namespace std;
 //tab
 class Solution {
 public:
-    //t[i]=max stolen money till house i
     int rob(vector<int>& nums) {
         int n=nums.size();
         if(n==1) return nums[0];
-        vector<int> t(n+1,0);
-        t[0]=0;
-        t[1]=nums[0];
+        vector<int> t(n+1,0);  //t[i]=max stolen money till house i
+        t[0]=0;//no house-no money
+        t[1]=nums[0];//1 house only
         for(int i=2;i<=n;i++){
             int steal=nums[i-1]+t[i-2];
             int skip=t[i-1];
@@ -79,8 +78,8 @@ public:
 
 
 
-
-// //java
+//java
+// //tab
 // class Solution {
 //     public int rob(int[] num) {
 //         int[][] dp = new int[num.length + 1][2];
@@ -91,13 +90,16 @@ public:
 //         return Math.max(dp[num.length][0], dp[num.length][1]);
 //     }
 // }
-// // public int rob(int[] num) {
-// //     int rob = 0; //max monney can get if rob current house
-// //     int notrob = 0; //max money can get if not rob current house
-// //     for(int i=0; i<num.length; i++) {
-// //         int currob = notrob + num[i]; //if rob current value, previous house must not be robbed
-// //         notrob = Math.max(notrob, rob); //if not rob ith house, take the max value of robbed (i-1)th house and not rob (i-1)th house
-// //         rob = currob;
+// // //memo
+// // class Solution {
+// //     public int rob(int[] num) {
+// //         int rob = 0; //max monney can get if rob current house
+// //         int notrob = 0; //max money can get if not rob current house
+// //         for(int i=0; i<num.length; i++) {
+// //             int currob = notrob + num[i]; //if rob current value, previous house must not be robbed
+// //             notrob = Math.max(notrob, rob); //if not rob ith house, take the max value of robbed (i-1)th house and not rob (i-1)th house
+// //             rob = currob;
+// //         }
+// //         return Math.max(rob, notrob);
 // //     }
-// //     return Math.max(rob, notrob);
 // // }
