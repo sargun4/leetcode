@@ -16,9 +16,7 @@ class Solution:
                 for dr,dc in dirn:
                     row,col=dr+r,dc+c
                     # if in bounds and fresh- then rot it
-                    if(row<0 or row==len(grid) 
-                    or col<0 or col==len(grid[0]) or
-                    grid[row][col]!=1):
+                    if(row<0 or row==len(grid) or col<0 or col==len(grid[0]) or grid[row][col]!=1):
                         continue
                     grid[row][col]=2
                     q.append([row,col])
