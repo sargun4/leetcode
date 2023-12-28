@@ -6,20 +6,58 @@ using namespace std;
 
 // https://practice.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1
  
+// #include <bits/stdc++.h>
+// using namespace std;
+ 
+// class Solution {
+//   public:
+//     bool isCycleDFS(vector<int> adj[],int u,vector<bool> &vis, int parent){
+//         vis[u]=true;
+//         for(int &v:adj[u]){
+//             if(v==parent) continue;
+//             if(vis[v]){ //v has already been visited earlier-> haas cycle
+//                 return true;
+//             }
+//             if(isCycleDFS(adj, v, vis, u))
+//                 return true;
+//         }
+//         return false;
+//     }
+//     // Function to detect cycle in an undirected graph.
+//     bool isCycle(int V, vector<int> adj[]) {
+//         vector<bool> vis(V,false);
+//         for (int i = 0;i < V;i++) {
+//             if (!vis[i] && isCycleDFS(adj,i,vis,-1)){
+//                 return true;
+//             }
+//         }
+//         return false;
+//     }
+// };
+ 
 #include <bits/stdc++.h>
 using namespace std;
  
 class Solution {
   public:
-    bool isCycleDFS(vector<int> adj[],int u,vector<bool> &vis, int parent){
+    bool isCycleBFS(vector<int> adj[],int u,vector<bool> &vis){
         vis[u]=true;
-        for(int &v:adj[u]){
-            if(v==parent) continue;
-            if(vis[v]){ //v has already been visited earlier-> haas cycle
-                return true;
+        queue<pair<int,int>> q;
+        q.push({u,-1});
+        vis[u]=true;
+        while(!q.empty()){
+            pair<int,int> p=q.front();
+            q.pop();
+            int src=p.first;
+            int parent=p.second;
+            for(int &v:adj[src]){
+                if(vis[v]==false){
+                    vis[v]=true;
+                    q.push({v,src});
+                }else if(v!=parent){
+                    return true;
+                }
             }
-            if(isCycleDFS(adj, v, vis, u))
-                return true;
         }
         return false;
     }
@@ -27,13 +65,14 @@ class Solution {
     bool isCycle(int V, vector<int> adj[]) {
         vector<bool> vis(V,false);
         for (int i = 0;i < V;i++) {
-            if (!vis[i] && isCycleDFS(adj,i,vis,-1)){
+            if (!vis[i] && isCycleBFS(adj,i,vis)){
                 return true;
             }
         }
         return false;
     }
 };
+ 
  
 
 //{ Driver Code Starts.
