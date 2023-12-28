@@ -1,5 +1,3 @@
-#User function Template for python3
-
 class Solution: 
     def spirallyTraverse(self,matrix, r, c):  
         lst=[]
