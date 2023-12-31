@@ -15,23 +15,39 @@
 //         return res;
 //     }
 // };
-
-#include <bits/stdc++.h>
-using namespace std;
 class Solution {
 public:
     int maxLengthBetweenEqualCharacters(string s) {
         int n=s.length();
         int res=-1;
-        unordered_map<char,int> m;
+        vector<int> count(26,-1);
         for (int i = 0; i < n; i++){
             char ch=s[i];
-            if(m.find(ch)==m.end()){
-                m[ch]=i;
+            if(count[ch-'a']==-1){
+                count[ch-'a']=i;
             }else{
-                res=max(res,i-m[ch]-1);
+                res=max(res,i-count[ch-'a']-1);
             }
         }
         return res;
     }
 };
+// #include <bits/stdc++.h>
+// using namespace std;
+// class Solution {
+// public:
+//     int maxLengthBetweenEqualCharacters(string s) {
+//         int n=s.length();
+//         int res=-1;
+//         unordered_map<char,int> m;
+//         for (int i = 0; i < n; i++){
+//             char ch=s[i];
+//             if(m.find(ch)==m.end()){
+//                 m[ch]=i;
+//             }else{
+//                 res=max(res,i-m[ch]-1);
+//             }
+//         }
+//         return res;
+//     }
+// };
