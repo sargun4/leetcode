@@ -29,38 +29,31 @@ void printPostOrder(Node *root)
 
 // } Driver Code Ends
 
+
 class Solution{
     public:
-    void createMapping(int in[], map<int,vector<int>> &nodeToindex, int n){
-        for(int i=0;i<n;i++){
-            nodeToindex[in[i]].push_back(i);
-        }
-    } 
-    Node *solve(int in[],int pre[], int &index,int inorderStart,int inorderEnd,int n,map<int,vector<int>>&nodeToindex){
-        if(index>=n || inorderStart>inorderEnd){
-            return nullptr;
-        }
-        int element = pre[index++];
-        Node *root = new Node(element);
-        vector<int> pos = nodeToindex[element];
-        int i;
-        for(i=0;i<pos.size();i++){
-            if(pos[i]>=inorderStart && pos[i]<=inorderEnd){
+    int preIdx=0;
+    Node* constr(int in[],int pre[],int is,int ie){
+        if (is > ie) 
+            return NULL;
+        Node *root = new Node(pre[preIdx]);
+        preIdx++;
+        int inIdx=0;
+        for(int i=is;i<=ie;i++){
+            if(in[i]==root->data){
+                inIdx=i;
                 break;
             }
         }
-        root->left =solve(in,pre,index,inorderStart,pos[i]-1,n,nodeToindex);
-        root->right =solve(in,pre,index,pos[i]+1,inorderEnd,n,nodeToindex);
+        root->left = constr(in,pre,is,inIdx-1);
+        root->right = constr(in,pre,inIdx+1,ie);
         return root;
     }
     Node* buildTree(int in[],int pre[], int n){
-        int preindex=0;
-        map<int,vector<int>>nodeToindex;
-        createMapping(in,nodeToindex,n);
-        Node *ans =solve(in,pre,preindex,0,n-1,n,nodeToindex);
-        return ans;
+        return constr(in,pre,0,n-1);
     }
 };
+
 
 
 //{ Driver Code Starts.
