@@ -1,4 +1,4 @@
-<h2><a href="https://www.geeksforgeeks.org/problems/level-order-traversal/1?page=2&sprint=ca8ae412173dbd8346c26a0295d098fd&sortBy=submissions">Level order traversal</a></h2><h3>Difficulty Level : Easy</h3><hr><div class="problems_problem_content__Xm_eO"><p>Given a binary tree, find its level order traversal.<br>
+<h2><a href="https://www.geeksforgeeks.org/problems/level-order-traversal/1">Level order traversal</a></h2><h3>Difficulty Level : Easy</h3><hr><div class="problems_problem_content__Xm_eO"><p>Given a binary tree, find its level order traversal.<br>
 Level order traversal of a tree is <a href="http://www.geeksforgeeks.org/breadth-first-traversal-for-a-graph/">breadth-first traversal f</a>or the tree.</p>
 
 <p><br>
