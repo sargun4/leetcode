@@ -73,33 +73,33 @@ def buildTree(s):
     
 
 # } Driver Code Ends
-# Your task is to complete this function
-# function should return max sum level in the tree
+
 class Solution:
     def maxLevelSum(self, root):
-        res=[]
-        q=[]
-        q.append(root)
-        while(q):
-            lvl=[]
-            n=len(q)
-            for i in range(n):
-                node=q.pop(0)
-                if(node):
-                    lvl.append(node.data)
-                if(node.left):
-                    q.append(node.left)
-                if(node.right):
-                    q.append(node.right)
-            res.append(lvl)
-        # print(res)
-        numlvls=len(res)
-        l=[]
-        for i in range(numlvls):
-            arr=res[i]
-            s=sum(arr)
-            l.append(s)
-        return(max(l))
+        res = []
+        def lvlorder(root):
+            q = [root]  
+            while q:
+                n = len(q)
+                lvl = []
+                for i in range(n):
+                    node = q.pop(0)
+                    if node:
+                        lvl.append(node.data)
+                    if node.left:
+                        q.append(node.left)
+                    if node.right:
+                        q.append(node.right)
+                res.append(lvl)
+
+        lvlorder(root)
+        arr = []
+        for i in range(len(res)):
+            l = res[i]
+            x = sum(l)
+            arr.append(x)
+        ans = max(arr)
+        return ans
 
 #{ 
  # Driver Code Starts.
