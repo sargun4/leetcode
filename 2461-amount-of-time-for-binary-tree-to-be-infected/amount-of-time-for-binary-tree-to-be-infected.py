@@ -12,6 +12,10 @@ class Solution:
     def amountOfTime(self, root: Optional[TreeNode], start: int) -> int:
         graph = defaultdict(list) 
         self.buildMap(root, None, graph)
+        # Print the created graph
+        print("Graph:")
+        for node, neighbors in graph.items():
+            print(f"{node}: {neighbors}")
         if start not in graph:
             print("start node not in graph")
             return -1
