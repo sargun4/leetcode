@@ -1,4 +1,4 @@
-<h2><a href="https://www.geeksforgeeks.org/problems/minimum-element-in-bst/1?page=2&category=Tree&sortBy=submissions">Minimum element in BST</a></h2><h3>Difficulty Level : Basic</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a <strong>Binary Search Tree</strong>. The task is to find the minimum valued element in this given BST. </span></p>
+<h2><a href="https://www.geeksforgeeks.org/problems/minimum-element-in-bst/1">Minimum element in BST</a></h2><h3>Difficulty Level : Basic</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a <strong>Binary Search Tree</strong>. The task is to find the minimum valued element in this given BST. </span></p>
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
 
