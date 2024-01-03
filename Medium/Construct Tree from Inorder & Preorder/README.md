@@ -1,4 +1,4 @@
-<h2><a href="https://www.geeksforgeeks.org/problems/construct-tree-1/1?page=7&category=Tree&sortBy=difficulty">Construct Tree from Inorder & Preorder</a></h2><h3>Difficulty Level : Medium</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given 2 Arrays of Inorder and preorder traversal. The tree can contain duplicate elements. Construct a tree and print the Postorder traversal.&nbsp;</span></p>
+<h2><a href="https://www.geeksforgeeks.org/problems/construct-tree-1/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=bottom_sticky_on_article">Construct Tree from Inorder & Preorder</a></h2><h3>Difficulty Level : Medium</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given 2 Arrays of Inorder and preorder traversal. The tree can contain duplicate elements. Construct a tree and print the Postorder traversal.&nbsp;</span></p>
 
 <p><strong><span style="font-size:18px">Example 1:</span></strong></p>
 
