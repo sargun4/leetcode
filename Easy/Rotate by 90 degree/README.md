@@ -1,4 +1,4 @@
-<h2><a href="https://practice.geeksforgeeks.org/problems/rotate-by-90-degree-1587115621/1?page=1&category=Matrix&sprint=94ade6723438d94ecf0c00c3937dad55&sortBy=submissions">Rotate by 90 degree</a></h2><h3>Difficulty Level : Easy</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a<strong> </strong>square<strong> </strong>matrix&nbsp;of size <strong>N x N</strong>. The task is to rotate it by<strong> 90 degrees in anti-clockwise</strong> direction without using any extra space.&nbsp;</span><br>
+<h2><a href="https://www.geeksforgeeks.org/problems/rotate-by-90-degree-1587115621/1">Rotate by 90 degree</a></h2><h3>Difficulty Level : Easy</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a<strong> </strong>square<strong> </strong>matrix&nbsp;of size <strong>N x N</strong>. The task is to rotate it by<strong> 90 degrees in anti-clockwise</strong> direction without using any extra space.&nbsp;</span><br>
 <br>
 <span style="font-size:18px"><strong>Example 1:</strong></span></p>
 
