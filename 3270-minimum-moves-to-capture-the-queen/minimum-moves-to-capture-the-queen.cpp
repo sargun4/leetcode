@@ -1,4 +1,6 @@
-#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
 // Rook Capture:
 // If the rook and queen are in the same row (a == e), the code checks if they are not in the same column (a != c) or if they are in the same 
 // column but there is no bishop in between (max(b, f) < d || min(b, f) > d).
@@ -19,20 +21,18 @@ class Solution {
 public:
     // Function to calculate the minimum moves to capture the queen
     int minMovesToCaptureTheQueen(int rookX, int rookY, int bishopX, int bishopY, int queenX, int queenY) {
-        
         // Check if rook and queen are in the same row and there is no bishop in between
         if(rookX == queenX) {
-            if(rookX != bishopX || (rookX == bishopX && (std::max(rookY, queenY) < bishopY || std::min(rookY, queenY) > bishopY))) {
+            if(rookX != bishopX || (rookX == bishopX && (max(rookY, queenY) < bishopY || min(rookY, queenY) > bishopY))) {
                 return 1; // Queen can be captured in one move
             }
         } 
         // Check if rook and queen are in the same column and there is no bishop in between
         else if(rookY == queenY) {
-            if(rookY != bishopY || (rookY == bishopY && (std::max(rookX, queenX) < bishopX || std::min(rookX, queenX) > bishopX))) {
+            if(rookY != bishopY || (rookY == bishopY && (max(rookX, queenX) < bishopX || min(rookX, queenX) > bishopX))) {
                 return 1; // Queen can be captured in one move
             }
         }
-        
         // Check if bishop and queen are on the same diagonal
         int x = bishopX, y = bishopY, bishopBlocked = 0;
         while(x <= 8 && y <= 8) { // Bishop moves ⬊
@@ -44,7 +44,6 @@ public:
             }
             x++, y++;
         }
-        
         x = bishopX, y = bishopY, bishopBlocked = 0;
         while(x >= 1 && y >= 1) { // Bishop moves ⬉
             if(x == rookX && y == rookY) {
@@ -55,7 +54,6 @@ public:
             }
             x--, y--;
         }
-        
         x = bishopX, y = bishopY, bishopBlocked = 0;
         while(x <= 8 && y >= 1) { // Bishop moves ⬋
             if(x == rookX && y == rookY) {
@@ -66,7 +64,6 @@ public:
             }
             x++, y--;
         }
-        
         x = bishopX, y = bishopY, bishopBlocked = 0;
         while(x >= 1 && y <= 8) { // Bishop moves ⬈
             if(x == rookX && y == rookY) {
@@ -77,7 +74,6 @@ public:
             }
             x--, y++;
         }
-        
         return 2; // Queen can be captured in at most 2 moves
     }
 };
