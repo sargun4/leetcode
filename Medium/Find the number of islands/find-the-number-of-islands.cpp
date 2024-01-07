@@ -6,51 +6,93 @@ using namespace std;
 
 class Solution {
   public:
-    void dfs(vector<vector<char>>& grid , vector<vector<bool>>&visited , int i , int j){
-        int rows=grid.size();
-        int column=grid[0].size();
-        visited[i][j]=true;
-        if(i-1 >= 0 && j+1 < column && grid[i-1][j+1]=='1' && visited[i-1][j+1]==false){
-            dfs(grid , visited , i-1 , j+1);
+    void dfs(vector<vector<char>>& grid ,int vis[][501] , int i , int j,int rows,int cols){
+        if(i<0 or j<0 or i>=rows or j>=cols){
+            return;
         }
-        if(i+1 < rows && j-1 >= 0 && grid[i+1][j-1]=='1' && visited[i+1][j-1]==false){
-            dfs(grid , visited , i+1 , j-1);
-        }
-        if(i+1 < rows && j+1 < column && grid[i+1][j+1]=='1' && visited[i+1][j+1]==false){
-            dfs(grid , visited , i+1 , j+1);
-        }
-        if(i+1 < rows && j < column && grid[i+1][j]=='1' && visited[i+1][j]==false){
-            dfs(grid , visited , i+1 , j);
-        }
-        if(j+1 < column && grid[i][j+1]=='1' && visited[i][j+1]==false){
-            dfs(grid , visited , i , j+1);
-        }
-        if(i-1 >= 0 && j-1 >= 0 && grid[i-1][j-1]=='1' && visited[i-1][j-1]==false){
-            dfs(grid , visited , i-1 , j-1);
-        }
-        if(i-1 >= 0  && grid[i-1][j]=='1' && visited[i-1][j]==false){
-            dfs(grid , visited , i-1 , j);
-        }
-        if(j-1 >= 0 && grid[i][j-1]=='1' && visited[i][j-1]==false){
-            dfs(grid , visited , i , j-1);
+        if (grid[i][j] == '0') return;
+        if(!vis[i][j]){
+            vis[i][j]=1;
+            dfs(grid,vis,i+1,j,rows,cols);
+            dfs(grid,vis,i-1,j,rows,cols);
+            dfs(grid,vis,i,j+1,rows,cols);
+            dfs(grid,vis,i,j-1,rows,cols); 
+            dfs(grid,vis,i+1,j+1,rows,cols);//down right
+            dfs(grid,vis,i-1,j-1,rows,cols);//up left
+            dfs(grid,vis,i+1,j-1,rows,cols);//up right
+            dfs(grid,vis,i-1,j+1,rows,cols);//down left
         }
     }
     int numIslands(vector<vector<char>>& grid) {
         int rows = grid.size();
-        int column = grid[0].size();
-        vector<vector<bool>> visited(rows,vector<bool>(column,false));
-        int ans=0;
-        for(int i=0 ; i<rows ; i++){
-            for(int j=0 ; j< column ; j++){
-                if(visited[i][j]==false && grid[i][j]=='1'){
-                    dfs(grid , visited , i , j);
-                    ans++;
+        int cols = grid[0].size();
+        int vis[501][501];
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                vis[i][j]=0;
+            }
+        }
+        int ctr=0;
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                if(!vis[i][j] and grid[i][j]=='1'){
+                    dfs(grid,vis,i,j,rows,cols);
+                    ctr++;
                 }
             }
         }
-        return ans;
+        return ctr;
     }
 };
+  
+// class Solution {
+//   public:
+//     void dfs(vector<vector<char>>& grid , vector<vector<bool>>&vis , int i , int j){
+//         int rows=grid.size();
+//         int cols=grid[0].size();
+//         vis[i][j]=true;
+//         if(i-1 >= 0 && j+1 < cols && grid[i-1][j+1]=='1' && vis[i-1][j+1]==false){
+//             dfs(grid , vis , i-1 , j+1);
+//         }
+//         if(i+1 < rows && j-1 >= 0 && grid[i+1][j-1]=='1' && vis[i+1][j-1]==false){
+//             dfs(grid , vis , i+1 , j-1);
+//         }
+//         if(i+1 < rows && j+1 < cols && grid[i+1][j+1]=='1' && vis[i+1][j+1]==false){
+//             dfs(grid , vis , i+1 , j+1);
+//         }
+//         if(i+1 < rows && j < cols && grid[i+1][j]=='1' && vis[i+1][j]==false){
+//             dfs(grid , vis , i+1 , j);
+//         }
+//         if(j+1 < cols && grid[i][j+1]=='1' && vis[i][j+1]==false){
+//             dfs(grid , vis , i , j+1);
+//         }
+//         if(i-1 >= 0 && j-1 >= 0 && grid[i-1][j-1]=='1' && vis[i-1][j-1]==false){
+//             dfs(grid , vis , i-1 , j-1);
+//         }
+//         if(i-1 >= 0  && grid[i-1][j]=='1' && vis[i-1][j]==false){
+//             dfs(grid , vis , i-1 , j);
+//         }
+//         if(j-1 >= 0 && grid[i][j-1]=='1' && vis[i][j-1]==false){
+//             dfs(grid , vis , i , j-1);
+//         }
+//     }
+//     int numIslands(vector<vector<char>>& grid) {
+//         int rows = grid.size();
+//         int cols = grid[0].size();
+//         vector<vector<bool>> vis(rows,vector<bool>(cols,false));
+//         int ans=0;
+//         for(int i=0 ; i<rows ; i++){
+//             for(int j=0 ; j< cols ; j++){
+//                 if(vis[i][j]==false && grid[i][j]=='1'){
+//                     dfs(grid , vis , i , j);
+//                     ans++;
+//                 }
+//             }
+//         }
+//         return ans;
+//     }
+// };
+ 
 
 //{ Driver Code Starts.
 int main() {
