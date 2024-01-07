@@ -68,29 +68,42 @@ int main()
 // } Driver Code Ends
 
 
-Node* sortedMerge(Node* head1, Node* head2) {
-    Node* dummy = new Node(-1);
-    Node* current = dummy;
-    while (head1 != NULL && head2 != NULL) {
-        if (head1->data < head2->data) {
-            current->next = new Node(head1->data);
-            head1 = head1->next;
-        } else {
-            current->next = new Node(head2->data);
-            head2 = head2->next;
-        }
-        current = current->next;
+Node* sortedMerge(Node* l1,Node* l2) {
+    if(l1==NULL) return l2;
+    if(l2==NULL) return l1;
+    if(l1->data<=l2->data){
+        l1->next=sortedMerge(l1->next,l2);
+        return l1;
+    }else{
+        l2->next=sortedMerge(l1,l2->next);
+        return l2;
     }
-    // If any of the linked lists is not fully traversed, add the remaining nodes
-    while (head1 != NULL) {
-        current->next = new Node(head1->data);
-        head1 = head1->next;
-        current = current->next;
-    }
-    while (head2 != NULL) {
-        current->next = new Node(head2->data);
-        head2 = head2->next;
-        current = current->next;
-    }
-    return dummy->next;
+    return NULL;
 }
+// //gfg
+// Node* sortedMerge(Node* head1, Node* head2) {
+//     Node* dummy = new Node(-1);
+//     Node* current = dummy;
+//     while (head1 != NULL && head2 != NULL) {
+//         if (head1->data < head2->data) {
+//             current->next = new Node(head1->data);
+//             head1 = head1->next;
+//         } else {
+//             current->next = new Node(head2->data);
+//             head2 = head2->next;
+//         }
+//         current = current->next;
+//     }
+//     // If any of the linked lists is not fully traversed, add the remaining nodes
+//     while (head1 != NULL) {
+//         current->next = new Node(head1->data);
+//         head1 = head1->next;
+//         current = current->next;
+//     }
+//     while (head2 != NULL) {
+//         current->next = new Node(head2->data);
+//         head2 = head2->next;
+//         current = current->next;
+//     }
+//     return dummy->next;
+// }
