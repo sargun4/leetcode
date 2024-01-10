@@ -10,7 +10,8 @@ class Solution:
             self.buildMap(node.left, node.val, graph)
             self.buildMap(node.right, node.val, graph)
     def amountOfTime(self, root: Optional[TreeNode], start: int) -> int:
-        graph = defaultdict(list) 
+        graph={}
+        # graph = defaultdict(list) 
         self.buildMap(root, None, graph)
         # Print the created graph
         print("Graph:")
@@ -20,6 +21,7 @@ class Solution:
             print("start node not in graph")
             return -1
         vis = set([start])
+        # print(vis)
         q = deque([start])
         time = 0
         while q:
@@ -32,6 +34,7 @@ class Solution:
                     vis.add(neighbor)
                     q.append(neighbor)
             time += 1
+        # print(vis)
         return time-1
  
 
