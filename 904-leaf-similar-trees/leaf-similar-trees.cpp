@@ -1,31 +1,18 @@
+ 
 class Solution {
 public:
     bool leafSimilar(TreeNode* root1, TreeNode* root2) {
-        vector<int> leaves1 = getLeafSequence(root1);
-        vector<int> leaves2 = getLeafSequence(root2);
+        vector<int> leaves1;
+        vector<int> leaves2;
+        dfs(root1,leaves1);
+        dfs(root2,leaves2);
         return leaves1 == leaves2;
     }
-private:
-    vector<int> getLeafSequence(TreeNode* root) {
-        vector<int> leaves;
-        if (!root)
-            return leaves;
-        stack<TreeNode*> stack;
-        stack.push(root);
-        while (!stack.empty()) {
-            TreeNode* node = stack.top();
-            stack.pop();
-            if (!node->left && !node->right) {
-                leaves.push_back(node->val);
-            }
-            if (node->right) {
-                stack.push(node->right);
-            }
-            if (node->left) {
-                stack.push(node->left);
-            }
-        }
-        return leaves;
+    void dfs(TreeNode* node,vector<int>&leaves) {
+        if(node==NULL) return;
+        dfs(node->left,leaves);
+        dfs(node->right,leaves); 
+        if(!node->left && !node->right) leaves.push_back(node->val);
     }
 };
  
