@@ -1,5 +1,35 @@
-#include <bits/stdc++.h>
-using namespace std; 
+#include<bits/stdc++.h>
+using namespace std;
+class Solution {
+public:
+    int trap(vector<int>& height) {        
+        int water=0;
+        int n = height.size(); 
+        int maxHtleft=0;
+        int maxHtright=0;
+        vector<int> maxleft(n,0);
+        vector<int> maxright(n,0);
+        //filling maxleft
+        for(int i=0;i<n;i++){
+            if(maxHtleft < height[i]){
+                maxHtleft = height[i];
+            }
+            maxleft[i] = maxHtleft;
+        }
+        //filling maxright
+        for(int i=n-1;i>=0;i--){
+            if(maxHtright < height[i]){
+                maxHtright = height[i];
+            }
+            maxright[i] = maxHtright;
+        }
+        for(int i=0;i<n;i++){//O(n)
+            int temp = min(maxleft[i],maxright[i]) - height[i];
+            water = water+((temp>0)?temp:0);
+        }
+        return water;
+    }
+}; 
 // class Solution {
 // public:
 //     int trap(vector<int>& height) {        
@@ -22,35 +52,3 @@ using namespace std;
 //         return res;
 //     }
 // };
-class Solution {
-public:
-    vector<int> getLeftMaxArr(vector<int>& height,int &n){
-        vector<int> leftMax(n,0);
-        leftMax[0]=height[0];
-        for(int i=1;i<n;i++){
-            leftMax[i]=max(leftMax[i-1],height[i]);
-        }
-        return leftMax;
-    }
-    vector<int> getRightMaxArr(vector<int>& height,int &n){
-        vector<int> rightMax(n,0);
-        rightMax[n-1]=height[n-1];
-        for(int i=n-2;i>=0;i--){
-            rightMax[i]=max(rightMax[i+1],height[i]);
-        }
-        return rightMax;
-    }
-
-    int trap(vector<int>& height) {        
-       int n=height.size();
-       vector<int> leftmax=getLeftMaxArr(height,n);
-       vector<int> rightmax=getRightMaxArr(height,n);
-
-       int sum=0;
-       for(int i=0;i<n;i++){
-           int h=min(leftmax[i],rightmax[i])-height[i];
-           sum+=h;
-       }
-       return sum;
-    }
-};
