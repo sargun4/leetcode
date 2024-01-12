@@ -1,3 +1,6 @@
+// #1
+// Time Complexity : O(m + n)
+// Space Complexity : O(m)
 class Solution {
 public:
     ListNode*getIntersectionNode(ListNode *headA, ListNode *headB) {
@@ -19,7 +22,10 @@ public:
         return intersecnode;
     }
 };
-// class Solution {
+// #2
+// Time Complexity : O(m + n)
+// Space Complexity : O(1)
+// class Solution { 
 // public:
 //     ListNode*getIntersectionNode(ListNode *headA, ListNode *headB) {
 //         ListNode*curr=headA;
@@ -51,18 +57,4 @@ public:
 //         return NULL;
 //     }
 // };
-// // class Solution {
-// // public:
-// //     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-// //         if(headA==NULL||headB==NULL) return NULL;
-// //         ListNode *a=headA;
-// //         ListNode*b=headB;
-// //         //if a & b hv diff len,the we'll stop the loop after 2nd iteration
-// //         while(a!=b){
-// //             //for the end of the 1st iteration, we just reset the ptr to the head of the other LL
-// //             a=a==NULL ? headB:a->next;
-// //             b=b==NULL ? headA:b->next;
-// //         }
-// //         return a;
-// //     }
-// // };
+ 
