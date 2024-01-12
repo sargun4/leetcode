@@ -13,3 +13,5 @@ public:
         return false;
     }
 };
+// T-O(n)
+// S-O(1);
