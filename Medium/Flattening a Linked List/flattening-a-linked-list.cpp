@@ -43,39 +43,55 @@ struct Node{
 	
 };
 */
-
 class Solution {
 public:
-    Node *merge(Node *l1, Node *l2){
-        if(l1 == NULL) return l2;
-        if(l2 == NULL) return l1;
-        if(l1 -> data > l2 -> data){
-            swap(l1, l2);
-        }
-        Node *head = l1;
-        while(l1 != NULL && l2 != NULL){
-            Node *temp = NULL;
-            while(l1 != NULL && l1 -> data <= l2 -> data){
-                temp = l1;
-                l1 = l1 -> bottom;
-            }
-            temp -> bottom = l2;
-            swap(l1 , l2);
-        }
-        return head;
-    }
-    Node* flatten(Node* root) {
-        if (root == NULL || root->next == NULL) return root;
-        Node* head2 = root->next;
-        while (head2 != NULL) {
-            Node* head2sNext = head2->next;
-            // Merge the two levels
-            root = merge(root, head2);
-            // Move to the next level
-            head2 = head2sNext;
-        }
-        return root;
-    }
+    // Node *merge(Node *l1, Node *l2){
+    //     if(l1 == NULL) return l2;
+    //     if(l2 == NULL) return l1;
+    //     if(l1 -> data > l2 -> data){
+    //         swap(l1, l2);
+    //     }
+    //     Node *head = l1;
+    //     while(l1 != NULL && l2 != NULL){
+    //         Node *temp = NULL;
+    //         while(l1 != NULL && l1 -> data <= l2 -> data){
+    //             temp = l1;
+    //             l1 = l1 -> bottom;
+    //         }
+    //         temp -> bottom = l2;
+    //         swap(l1 , l2);
+    //     }
+    //     return head;
+    // }
+        
+Node* merge(Node* h1, Node* h2) {
+    if (h1 == NULL) return h2;
+    if (h2 == NULL) return h1; 
+    Node* result = NULL; 
+    if (h1->data < h2->data) {
+        result = h1;
+        result->bottom = merge(h1->bottom, h2);
+    } else {
+        result = h2;
+        result->bottom = merge(h1, h2->bottom);
+    } 
+    return result;
+}
+
+Node* flatten(Node* root) {
+    if (root == NULL || root->next == NULL) return root; 
+    Node* h1 = root;
+    Node* h2 = root->next; 
+    while (h2 != NULL) {
+        Node* h2sNext = h2->next; 
+        // Merge the two levels
+        h1 = merge(h1, h2); 
+        // Move to the next level
+        h2 = h2sNext;
+    } 
+    return h1;
+}
+
 };
 
 //{ Driver Code Starts.
