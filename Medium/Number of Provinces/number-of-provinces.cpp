@@ -4,80 +4,42 @@ using namespace std;
 
 
 // } Driver Code Ends
+//User function Template for C++
 
-
-class disjointset{
-    vector<int> rank,parent,size;
-public:
-    disjointset(int n){
-        rank.resize(n+1,0);
-        parent.resize(n+1);
-        size.resize(n+1);
-        for(int i=0;i<=n;i++){
-            parent[i]=i;
-            size[i]=1;
-        }
-    }
-    int findUltimateParent(int node){
-        if(node==parent[node]){
-            return node;
-        }
-        return findUltimateParent(parent[node]);
-    }
-    void unionbyRank(int u,int v){
-        int ultParent_u=findUltimateParent(u);
-        int ultParent_v=findUltimateParent(v);
-        if(ultParent_u==ultParent_v){
-            return;
-        }
-        if(rank[ultParent_u]<rank[ultParent_v]){
-            parent[ultParent_u]=ultParent_v;
-        }
-        else if(rank[ultParent_u]>rank[ultParent_v]){
-            parent[ultParent_v]=ultParent_u;
-        }
-        else{
-            parent[ultParent_v]=ultParent_u;
-            rank[ultParent_u]++;
-        }
-    }
-
-    void unionbySize(int u,int v){
-        int ultParent_u=findUltimateParent(u);
-        int ultParent_v=findUltimateParent(v);
-        if(ultParent_u==ultParent_v){
-            return;
-        }
-        if(size[ultParent_u]<size[ultParent_v]){
-            parent[ultParent_u]=ultParent_v;
-            size[ultParent_v]+=size[ultParent_u];
-        }else{
-            parent[ultParent_v]=ultParent_u;
-            size[ultParent_u]+=size[ultParent_v];
-        }
-    }   
-};
+ 
 class Solution {
   public:
-    int numProvinces(vector<vector<int>> adj, int v) {
-        disjointset ds(v);
-        for(int i=0;i<v;i++){
-            for(int j=0;j<v;j++){
+    void dfs(unordered_map<int,vector<int>> &graph,int u,vector<bool> &vis){
+        vis[u] = true;
+        //visit neighbors
+        for (int &v : graph[u]){
+            if (!vis[v])
+                dfs(graph,v,vis);
+        }
+    }
+    int numProvinces(vector<vector<int>> adj, int V) {
+        int n=V;
+        vector<bool> vis(n,false);
+        //make graph
+        unordered_map<int,vector<int>> graph;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
                 if(adj[i][j]==1){
-                    ds.unionbySize(i,j);
+                    graph[i].push_back(j);
+                    graph[j].push_back(i);
                 }
             }
         }
         int ctr=0;
-        for(int i=0;i<v;i++){
-            if(ds.findUltimateParent(i)==i){
+        for(int i=0;i<n;i++){
+            if(!vis[i]){
+                dfs(graph,i,vis);
                 ctr++;
             }
         }
         return ctr;
     }
 };
-
 
 //{ Driver Code Starts.
 
