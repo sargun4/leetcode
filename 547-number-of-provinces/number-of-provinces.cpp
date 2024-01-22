@@ -1,44 +1,78 @@
 #include <bits/stdc++.h>
 using namespace std;
+#include <bits/stdc++.h>
+using namespace std;
 class Solution {
 public:
-    void bfs(unordered_map<int,vector<int>> &adj,int u,vector<bool>&vis){
+int n;
+    void bfs(vector<vector<int>>& isConnected,int u,vector<bool>&vis){
         queue<int> q;
         vis[u]=true;
         q.push(u);
         while(!q.empty()){
             int node=q.front();
             q.pop();
-            for(int &neigh:adj[node]){
-                if(!vis[neigh]){
-                    bfs(adj,neigh,vis);
+            //neighbors
+            for(int neigh=0;neigh<n;neigh++){
+                if(!vis[neigh] && isConnected[u][neigh]==1){
+                    bfs(isConnected,neigh,vis);
                 }
             }
         }
     }
     int findCircleNum(vector<vector<int>>& isConnected) {
-        int n=isConnected.size();
-        unordered_map<int,vector<int>> adj;
-        //make graph
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                if(isConnected[i][j]==1){
-                    adj[i].push_back(j);
-                    adj[j].push_back(i);
-                }
-            }
-        }
+         n=isConnected.size();
+
         vector<bool> vis(n,false);
         int ctr=0;
         for(int i=0;i<n;i++){
             if(!vis[i]){
-                bfs(adj,i,vis);
+                bfs(isConnected,i,vis);
                 ctr++;
             }
         }
         return ctr;
     }
 };
+// class Solution {
+// public:
+//     void bfs(unordered_map<int,vector<int>> &adj,int u,vector<bool>&vis){
+//         queue<int> q;
+//         vis[u]=true;
+//         q.push(u);
+//         while(!q.empty()){
+//             int node=q.front();
+//             q.pop();
+//             for(int &neigh:adj[node]){
+//                 if(!vis[neigh]){
+//                     bfs(adj,neigh,vis);
+//                 }
+//             }
+//         }
+//     }
+//     int findCircleNum(vector<vector<int>>& isConnected) {
+//         int n=isConnected.size();
+//         unordered_map<int,vector<int>> adj;
+//         //make graph
+//         for(int i=0;i<n;i++){
+//             for(int j=0;j<n;j++){
+//                 if(isConnected[i][j]==1){
+//                     adj[i].push_back(j);
+//                     adj[j].push_back(i);
+//                 }
+//             }
+//         }
+//         vector<bool> vis(n,false);
+//         int ctr=0;
+//         for(int i=0;i<n;i++){
+//             if(!vis[i]){
+//                 bfs(adj,i,vis);
+//                 ctr++;
+//             }
+//         }
+//         return ctr;
+//     }
+// };
 // //dfs
 // class Solution {
 //     void dfs(unordered_map<int,vector<int>> &adj,int u,vector<bool> &vis){
