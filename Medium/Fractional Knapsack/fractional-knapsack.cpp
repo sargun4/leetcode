@@ -36,10 +36,10 @@ class Solution{
             int idx=perkg[i].second;
             int v=arr[idx].value;
             int w=arr[idx].weight;
-            if(W>=w){
+            if(W>=w){ //size of knapsack >= size of ith item;
                 totalprofit+=v;
                 W-=w;
-            }else{
+            }else{ //fractional
                 totalprofit+=(static_cast<double>(v)/w)*W;
                 W=0;
             }
