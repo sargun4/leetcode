@@ -20,7 +20,6 @@ private:
             dfs(arr, path + arr[i], i + 1, result);
         }
     }
-
     bool isUniqueChars(const string& s) {
         unordered_set<char> set;
         for (char c : s) {
