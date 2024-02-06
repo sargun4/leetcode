@@ -1,5 +1,6 @@
 //without sorting
 //O(n*(k+26))
+
 class Solution {
 public:
     string generate(string&word){
