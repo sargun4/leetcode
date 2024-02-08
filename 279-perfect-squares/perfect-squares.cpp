@@ -15,6 +15,7 @@ public:
         }
         return dp[n]=mincount;
     }
+    
     int numSquares(int n) {
         memset(dp,-1,sizeof(dp));
         return helper(n);
