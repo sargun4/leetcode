@@ -6,35 +6,33 @@ using namespace std;
 // } Driver Code Ends
 
 
-//Tabulation-topdown
-class Solution{
-    public:
-    // Returns the maximum value that
-    // can be put in a knapsack of capacity W
+
+class Solution {
+public: 
+    int ks(int W, int wt[], int val[], int n,vector<vector<int>>&dp) {
+        // Base Case
+        if (n == 0 || W == 0)
+            return 0; 
+        // Check if the value is already memoized
+        if (dp[n][W] != -1)
+            return dp[n][W]; 
+        // If weight of the nth item is more than Knapsack capacity W, then
+        // this item cannot be included in the optimal solution
+        if (wt[n - 1] > W)
+            return dp[n][W] = ks(W, wt, val, n - 1,dp); 
+        // Return the maximum of two cases:
+        // (1) nth item included
+        // (2) not included
+        else
+            return dp[n][W] = max(val[n - 1] + ks(W - wt[n - 1], wt,val,n-1,dp),
+                                   ks(W, wt, val, n - 1,dp));
+    } 
     int knapSack(int W, int wt[], int val[], int n){
-        vector<vector<int>> dp(n+1,vector<int>(W+1,-1));
-    	// Base Case
-    // 	if (n == 0 || W == 0)
-    // 		return 0;
-        for(int i=0;i<=n;i++){
-            dp[i][0]=0;
-        }
-        for(int j=0;j<=W;j++){
-            dp[0][j]=0;
-        }
-        for(int i=1;i<=n;i++){
-            for(int j=1;j<=W;j++){
-                if(wt[i-1]<=j){
-                    dp[i][j]=max(val[i-1]+dp[i-1][j-wt[i-1]],
-                                dp[i-1][j]);
-                }else{
-                    dp[i][j]=dp[i-1][j];
-                }
-            }
-        }
-        return dp[n][W];
+        vector<vector<int>> dp(n+1,vector<int>(W + 1, -1));
+        return ks(W, wt, val, n,dp);
     }
 };
+
 
 
 
