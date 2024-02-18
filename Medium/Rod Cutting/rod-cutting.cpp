@@ -8,55 +8,36 @@ using namespace std;
 // } Driver Code Ends
 // User function Template for C++
 
- 
+
+#include <bits/stdc++.h>
+using namespace std;
+
 //memo
 class Solution{
 public:
-    int solve(int price[],int i,int n,vector<vector<int>>&dp){
+    int solve(int i,int n,int price[],vector<vector<int>> &dp){
         if(i==0){
             return n*price[0];
         }
         if(dp[i][n]!=-1){
-            return dp[i][n];  //return the result from memoization table
+            return dp[i][n];
         }
-        int notcut=solve(price,i-1,n,dp);
-        int cut=INT_MIN;
+        int skip=0+solve(i-1,n,price,dp);
+        int take=INT_MIN;
         int rodlen=i+1;
         if(rodlen<=n){
-            cut=price[i]+solve(price,i,n-rodlen,dp);
+            take=price[i]+solve(i,n-rodlen,price,dp);
         }
-        return dp[i][n]=max(notcut,cut);
+        return dp[i][n]= max(take,skip);
     }
     int cutRod(int price[], int n) {
-        vector<vector<int>>dp(n,vector<int>(n+1,-1));
-        return solve(price,n-1,n,dp);
+        vector<vector<int>> dp(n,vector<int>(n+1,-1));
+        return solve(n-1,n,price,dp);
     }
 };
 
 // //Time Complexity: O(N^2)
-// //Auxiliary Space: O(N)
-// //tle-onrmal recursion
-// class Solution{
-// public:
-//     int solve(int price[],int i,int n){
-//         if(i==0){
-//             return n*price[0];
-//         }
-//         //If we don't cut the rod of length i then total value will be n*
-//         //price[i] because we can sell it at full price.
-//         int notcut=solve(price,i-1,n);
-//         int cut=INT_MIN;
-//         int rodlen=i+1;
-//         if(rodlen<=n){
-//             cut=price[i]+solve(price,i,n-rodlen);
-//         }
-//         return max(notcut,cut);
-//     }
-//     int cutRod(int price[], int n) {
-//         /* price[] is an array that contains prices of different lengths */
-//         return solve(price,n-1,n);
-//     }
-// };
+// //Auxiliary Space: O(N) 
 
 //{ Driver Code Starts.
 
