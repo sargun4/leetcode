@@ -14,10 +14,11 @@ void printArray(int arr[], int size)
 
 // } Driver Code Ends
 
-  
+#include <bits/stdc++.h>
+using namespace std;  
+ 
 class Solution{
     public:
-    //Function to sort an array using quick sort algorithm.
     void quickSort(int arr[], int low, int high){
         if(low<high){
             int p=partition(arr,low,high);
@@ -25,7 +26,7 @@ class Solution{
             quickSort(arr,p+1,high);
         }
     }  
-    int partition (int arr[], int low, int high){
+    int partition(int arr[], int low, int high){
         int pivot=low;
         int i=low,j=high;
         while(i<j){
@@ -43,7 +44,7 @@ class Solution{
         return j;
     }
 };
- 
+  
 
 
 //{ Driver Code Starts.
