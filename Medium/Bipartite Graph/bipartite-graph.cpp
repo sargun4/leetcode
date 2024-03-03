@@ -4,36 +4,40 @@ using namespace std;
 
 // } Driver Code Ends
 
-  
-#include <bits/stdc++.h> 
-using namespace std; 
+
+
 class Solution {
 public:
-    bool dfs(vector<int>adj[],int curr,vector<int>&color,int currcolor){
-        color[curr] = currcolor;
-        for(int &v:adj[curr]){
-            if(color[v]==color[curr]){
-                return false;
-            }
-            if(color[v]==-1){//unvisited
-                int vcolor=1-currcolor;
-                if(dfs(adj,v,color,vcolor)==false)
+    bool bfs(vector<int>adj[],int curr,vector<int> &color,int currcolor){
+        queue<int> q;
+        q.push(curr);
+        color[curr]=currcolor;
+        while(!q.empty()){
+            int u=q.front();
+            q.pop();
+            for(int &v:adj[u]){
+                if(color[v]==color[u])
                     return false;
-            }
-        }
-        return true;
-    }
-	bool isBipartite(int V, vector<int>adj[]){
-	    vector<int> color(V,-1); //no nodes colored intiially
-        for(int i=0;i<V;i++){
-            if(color[i]==-1){//unviisted
-                if(dfs(adj,i,color,1)==false){
-                    return false;
+                else if(color[v]==-1){//not vis yet
+                    color[v]=1-color[u];
+                    q.push(v);
                 }
             }
         }
         return true;
-	}
+    } 
+	bool isBipartite(int V, vector<int>adj[]){ 
+	     vector<int> color(V, -1); //ALL UNCOlored initially
+        //red=1; green=0; 
+        for(int i=0;i<V;i++){
+            if(color[i]==-1){
+                if(bfs(adj,i,color,1)==false){
+                    return false;
+                }
+            }
+        } 
+ 
+	}   
 };
 
 //{ Driver Code Starts.
