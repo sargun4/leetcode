@@ -1,5 +1,5 @@
 class Solution {
-public:
+public: 
     ListNode* removeNthFromEnd(ListNode* head, int n) {
         ListNode *slow=head,*fast=head;
         while(n--){
