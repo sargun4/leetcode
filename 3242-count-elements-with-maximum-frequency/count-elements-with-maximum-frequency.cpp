@@ -34,4 +34,3 @@ public:
 // Calculate Total Frequency with Maximum Frequency:
 // Iterate through the unordered map (freq) again.
 // For each element, if its frequency is equal to the maximum frequency (maxi), add this frequency to the answer (ans).
-
