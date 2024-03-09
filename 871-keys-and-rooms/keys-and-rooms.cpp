@@ -15,7 +15,7 @@ public:
         vector<bool> vis(n,false);
         dfs(rooms,0,vis);
         for(bool x:vis){
-            if(x==false){
+            if(x==false){//1 room found which isnt visited
                 return false;
             }
         }
