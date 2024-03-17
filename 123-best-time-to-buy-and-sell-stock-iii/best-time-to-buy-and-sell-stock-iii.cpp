@@ -1,29 +1,58 @@
 #include <bits/stdc++.h>
 using namespace std;
-//tab
+//space opt
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
         int n=prices.size();   
-        vector<vector<vector<int>>> dp(n+1, vector<vector<int>>(2, vector<int>(3, 0))); // Initialize dp array with 0
+        // vector<vector<vector<int>>> dp(n+1, vector<vector<int>>(2, vector<int>(3, 0))); // Initialize dp array with 0
+        vector<vector<int>> after(2, vector<int>(3, 0)); 
+        vector<vector<int>> curr(2, vector<int>(3, 0)); 
+        
         for(int idx=n-1; idx>=0; idx--){
             for(int buy=0; buy<=1; buy++){
                 for(int cap=1;cap<=2;cap++){
                     if(buy==1){
-                        int take=-prices[idx]+dp[idx+1][0][cap];
-                        int skip=0+dp[idx+1][1][cap];
-                        dp[idx][buy][cap]=max(take,skip);
+                        int take=-prices[idx]+after[0][cap];
+                        int skip=0+after[1][cap];
+                        curr[buy][cap]=max(take,skip);
                     }else{//sell
-                        int take= +prices[idx]+dp[idx+1][1][cap-1];
-                        int skip=0+dp[idx+1][0][cap];
-                        dp[idx][buy][cap]=max(take,skip);
+                        int take= +prices[idx]+after[1][cap-1];
+                        int skip=0+after[0][cap];
+                        curr[buy][cap]=max(take,skip);
                     }
                 }
             }
+
+            after=curr;
         }
-        return dp[0][1][2];
+        return after[1][2];
     }
 };
+// //tab
+// class Solution {
+// public:
+//     int maxProfit(vector<int>& prices) {
+//         int n=prices.size();   
+//         vector<vector<vector<int>>> dp(n+1, vector<vector<int>>(2, vector<int>(3, 0))); // Initialize dp array with 0
+//         for(int idx=n-1; idx>=0; idx--){
+//             for(int buy=0; buy<=1; buy++){
+//                 for(int cap=1;cap<=2;cap++){
+//                     if(buy==1){
+//                         int take=-prices[idx]+dp[idx+1][0][cap];
+//                         int skip=0+dp[idx+1][1][cap];
+//                         dp[idx][buy][cap]=max(take,skip);
+//                     }else{//sell
+//                         int take= +prices[idx]+dp[idx+1][1][cap-1];
+//                         int skip=0+dp[idx+1][0][cap];
+//                         dp[idx][buy][cap]=max(take,skip);
+//                     }
+//                 }
+//             }
+//         }
+//         return dp[0][1][2];
+//     }
+// };
 // //memo
 // class Solution {
 // public:
