@@ -1,30 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
+
+//tab
 class Solution {
 public:
-//memo 
     // At most k transactions. 
-    int f(int idx, int transNo,int k,vector<int>& prices,vector<vector<int>>& dp){
-        int n = prices.size(); 
-        // Base case
-        if (idx == n || transNo == 2*k) // If we have reached the end of the prices array or all transactions completed (=k), return 0.
-            return 0; 
-        if (dp[idx][transNo]!=-1) // If the value is already calculated, return it.
-            return dp[idx][transNo]; 
-        if (transNo %2==0){//buy
-            int take = -prices[idx] + f(idx + 1,transNo+1,k,prices, dp); // Buy the stock and move to the next day (buy = 0)
-            int skip = f(idx + 1,transNo,k,prices, dp); // Skip buying the stock
-            return dp[idx][transNo] = max(take, skip);
-        } else { //sell
-            int take = prices[idx] + f(idx + 1,transNo+1,k,prices, dp); // Sell the stock and move to the next day with one fewer transaction availabltransNo+1-1
-            int skip = f(idx + 1,transNo,k,prices, dp); // Skip selling the stock
-            return dp[idx][transNo] = max(take, skip);
-        }
-    }  
     int maxProfit(int k, vector<int>& prices) {
         int n = prices.size();
-        vector<vector<int>> dp(n,vector<int>(2*k,-1));
-        return f(0, 0, k, prices, dp); // Start the recursive function with initial values
+        vector<vector<int>> dp(n+1,vector<int>(2*k+1,0));
+        for(int idx=n-1;idx>=0;idx--){
+            for(int transNo=2*k-1;transNo>=0;transNo--){
+                if(transNo%2==0){//buy
+                    int take=-prices[idx]+dp[idx+1][transNo+1];
+                    int skip=0+dp[idx+1][transNo];
+                    dp[idx][transNo]=max(take,skip);
+                }else{//sell
+                    int take=+prices[idx]+dp[idx+1][transNo+1];
+                    int skip=0+dp[idx+1][transNo];
+                    dp[idx][transNo]=max(take,skip);
+                }
+
+            }
+        }
+        return dp[0][0];
     }
 };
 // class Solution {
