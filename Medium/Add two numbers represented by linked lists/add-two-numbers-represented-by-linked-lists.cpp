@@ -44,50 +44,79 @@ void printList(Node* n)
 
 
 // } Driver Code Ends
+/* node for linked list:
+
+struct Node {
+    int data;
+    struct Node* next;
+    Node(int x) {
+        data = x;
+        next = NULL;
+    }
+};
+
+*/
 
 class Solution{
-public:
-    Node* rev(Node* head){
-        if (head == NULL || head->next == NULL) return head;
-        Node* curr=head;
-        Node* prev=NULL;
-        Node* temp;
-        while(curr!=NULL){
-            temp=curr->next;
+    public:
+    //Function to add two numbers represented by linked list.
+        Node *reverse(Node *head){
+        Node *prev=NULL,*curr=head,*nxt=NULL;
+        while(curr){
+            nxt=curr->next;
             curr->next=prev;
             prev=curr;
-            curr=temp;
+            curr=nxt;
         }
         return prev;
     }
-    //Function to add two numbers represented by linked list.
-    struct Node* addTwoLists(struct Node* first, struct Node* second){
-        Node* l1=rev(first);
-        Node* l2=rev(second);
-        int sum=0;
+    struct Node* addTwoLists(struct Node* num1, struct Node* num2)
+    {
+        // code here
+        Node *temp=NULL;
+        while(num1 and num1->data==0){
+            temp=num1;
+            num1=num1->next;
+        }
+        if(temp)temp->next=NULL;
+        temp=NULL;
+        while(num2 and num2->data==0){
+            temp=num2;
+            num2=num2->next;
+        }
+        if(temp)temp->next=NULL;
+        if(!num1 and !num2)return new Node(0);
+        if(!num1)return num2;
+        if(!num2)return num1;
+        num1=reverse(num1);
+        num2=reverse(num2);
+        temp=new Node(1);
+        Node *head1=num1,*head2=num2,*ans=temp;
         int carry=0;
-        Node* ans=new Node(0);
-        while(l1!=NULL || l2!=NULL){
-            if(l1!=NULL){
-                sum+=l1->data;
-                l1=l1->next;
-            }
-            if(l2!=NULL){
-                sum+=l2->data;
-                l2=l2->next;
-            }
-            ans->data=sum%10;
+        while(head1 and head2){
+            int sum = head1->data+head2->data+carry;
             carry=sum/10;
-            Node* newnode= new Node(carry);
-            newnode->next=ans;
-            ans=newnode;
-            sum=carry;
+            temp->next=new Node(sum%10);
+            temp=temp->next;
+            head1=head1->next;
+            head2=head2->next;
         }
-        if(carry==0){
-            return ans->next;
-        }else{
-            return ans;
+        while(head1){
+            int sum = head1->data+carry;
+            carry=sum/10;
+            temp->next=new Node(sum%10);
+            temp=temp->next;
+            head1=head1->next;
         }
+        while(head2){
+            int sum = head2->data+carry;
+            carry=sum/10;
+            temp->next=new Node(sum%10);
+            temp=temp->next;
+            head2=head2->next;
+        }
+        if(carry)temp->next=new Node(carry);
+        return reverse(ans->next);
     }
 };
 
@@ -103,12 +132,12 @@ int main()
         int n, m;
         
         cin>>n;
-        Node* first = buildList(n);
+        Node* num1 = buildList(n);
         
         cin>>m;
-        Node* second = buildList(m);
+        Node* num2 = buildList(m);
         Solution ob;
-        Node* res = ob.addTwoLists(first,second);
+        Node* res = ob.addTwoLists(num1,num2);
         printList(res);
     }
     return 0;
