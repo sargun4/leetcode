@@ -16,7 +16,7 @@ public:
         }
         return slow;
     }
-};
+};//t- O(n),space -O(1)
 
 // class Solution {
 // public:
