@@ -6,7 +6,7 @@ public:
         }
         ListNode* odd=head;
         ListNode* even=head->next;
-        ListNode* evenstart=head->next;
+        ListNode* evenstart=even;
         while(even!=NULL && even->next!=NULL){
             odd->next=even->next;
             even->next=even->next->next;
