@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+//2ptr approach
 class Solution {
 public:
     int maxArea(vector<int>& height) {
