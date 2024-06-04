@@ -9,7 +9,7 @@ public:
         map.insert({0,1});
         for (int i = 0; i < nums.size(); i++){
             currsum+=nums[i];
-            if (map.find(currsum-k) != map.end()){   // find the pair sum in hashmap
+            if (map.find(currsum-k) != map.end()){ // pair sum in map found
                 res+=map[currsum-k];
             }
             map[currsum]++;
