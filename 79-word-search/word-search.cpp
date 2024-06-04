@@ -7,7 +7,7 @@ public:
         int m=board.size();
         int n=board[0].size();
 
-        if(idx == word.length()) return true;
+        if(idx == word.length()) return true; //word found
         if( (i<0||j<0||i>=m||j>=n) || board[i][j]=='$'){
             return false;
         }
