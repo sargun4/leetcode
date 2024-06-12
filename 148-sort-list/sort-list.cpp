@@ -3,10 +3,10 @@ class Solution {
 public:
     // Function to find the middle of the list
     ListNode* middle(ListNode* head) {
-        if (head == nullptr) return nullptr;
+        if (head == NULL) return NULL;
         ListNode* slow = head;
         ListNode* fast = head;
-        while (fast->next != nullptr && fast->next->next != nullptr) {
+        while (fast->next != NULL && fast->next->next != NULL) {
             slow = slow->next;
             fast = fast->next->next;
         }
@@ -18,7 +18,7 @@ public:
         ListNode dummy(0); // Dummy node to simplify code
         ListNode* curr = &dummy;
 
-        while (p1 != nullptr && p2 != nullptr) {
+        while (p1 != NULL && p2 != NULL) {
             if (p1->val < p2->val) {
                 curr->next = p1;
                 p1 = p1->next;
@@ -29,7 +29,7 @@ public:
             curr = curr->next;
         }
 
-        if (p1 != nullptr) {
+        if (p1 != NULL) {
             curr->next = p1;
         } else {
             curr->next = p2;
@@ -40,11 +40,11 @@ public:
 
     // Function to sort the list using merge sort
     ListNode* sortList(ListNode* head) {
-        if (head == nullptr || head->next == nullptr) return head;
+        if (head == NULL || head->next == NULL) return head;
 
         ListNode* mid = middle(head);
         ListNode* rightHead = mid->next;
-        mid->next = nullptr;
+        mid->next = NULL;
 
         ListNode* leftHalf = sortList(head);
         ListNode* rightHalf = sortList(rightHead);
