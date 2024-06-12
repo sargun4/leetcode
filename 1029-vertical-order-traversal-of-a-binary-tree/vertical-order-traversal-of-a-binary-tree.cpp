@@ -1,33 +1,33 @@
 class Solution {
 public:
-    vector < vector < int >> verticalTraversal(TreeNode * root) {
-        map < int, map < int, multiset < int >>> nodes;
-        queue < pair < TreeNode * , pair < int, int >>> q;
+    vector<vector<int>> verticalTraversal(TreeNode* root) {
+        map<int,map<int,multiset<int>>> nodes; //nodes={vert:{horiz:{nodes}}}
+        queue<pair<TreeNode*,pair<int,int>>> q;//q={node,{x,y}};
         q.push({root,{0,0}});//initial vertical and level
-        while (!q.empty()) {
+        while(!q.empty()){
             auto p = q.front();
             q.pop();
-            TreeNode * temp = p.first;
+            TreeNode* temp = p.first;
             //x -> vertical , y->level
-            int x = p.second.first, y = p.second.second;
-            nodes[x][y].insert(temp -> val); //inserting to multiset
-            if (temp -> left) {
-            q.push({temp -> left,{x - 1,y + 1}});
+            int x=p.second.first, y=p.second.second;
+            nodes[x][y].insert(temp->val); //inserting to multiset
+            if(temp->left){
+                q.push({temp->left,{x-1,y+1}}); 
             }
-            if (temp -> right) {
-                q.push({temp -> right,{x + 1,y + 1}});
+            if(temp->right){
+                q.push({temp->right,{x+1,y+1}});
             }
         }
-        vector < vector < int >> ans;
+        vector<vector<int>>ans;
         for (auto p: nodes) {
-            vector < int > col;
-            for (auto q: p.second) {
+            vector<int> col;
+            for (auto q:p.second) {
             col.insert(col.end(), q.second.begin(), q.second.end());
             }
             ans.push_back(col);
         }
         return ans;
-        }
+    }
 };
 
 // //dfs
