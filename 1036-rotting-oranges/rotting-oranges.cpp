@@ -1,68 +1,7 @@
-//TLE
+
 #include <bits/stdc++.h>
 using namespace std;
-// class Solution {
-//     public:
-//     bool isvalid(int i,int j,int n,int m,vector < vector < int >> & grid){
-//         if(i>=0 && i<n && j>=0 && j<m && grid[i][j]==1){
-//             return true;
-//         }
-//         return false;
-//     } 
-//      //find min time required to rot all oranges. 
-//     int orangesRotting(vector < vector < int >> & grid) {
-//         int n=grid.size();
-//         int m=grid[0].size();
-//         int fresh=0,time=0;
-//         queue<pair<int,int>> q;
-//         for(int i=0;i<n;i++){
-//             for(int j=0;j<m;j++){
-//                 if(grid[i][j]==2){//rotten,push into q
-//                 q.push({i,j});
-//                 }else if(grid[i][j]==1){
-//                     fresh++;
-//                 }
-//             }
-//         }
-//         if(fresh==0) return 0;
-//         //start bfs
-//         while(!q.empty()){
-//             int size=q.size();
-//             int temp=0;
-//             while(size!=0){
-//                 pair<int,int> p=q.front();
-//                 q.pop();
-//                 int x=p.first;
-//                 int y=p.second;
-//                 int dirx[4]={1,-1,0,0};
-//                 int diry[4]={0,0,1,-1};
-//                 for(int i=0;i<4;i++){
-//                     int nx=dirx[i]+x;
-//                     int ny=diry[i]+y;
-//                     if(isvalid(nx,ny,n,m,grid)){
-//                         temp++;
-//                         grid[x][y]=2;
-//                         q.push({x,y});
-//                     }
-//                 }
-//                 size--;
-//             }
-//             if(temp!=0) time++;
-//         }
-//         //check if any fresh oanges still there
-//         for(int i=0;i<n;i++){
-//             for(int j=0;j>m;j++){
-//                 if(grid[i][j]==1){
-//                     time=0;
-//                 }
-//             }
-//         }
-        
-//         return (time==0) ?-1:time;
-//     }
-// };
-
-
+//bfs
 class Solution {
     public:
      //find min time required to rot all oranges. 
@@ -90,7 +29,7 @@ class Solution {
                 for(int i=0;i<4;i++){ //4 dirn
                     int neigh_row=x+dx[i];
                     int neigh_col=y+dy[i];
-                    if(neigh_row<0|| neigh_row>=m || neigh_col<0 || neigh_col>=n || grid[neigh_row][neigh_col]!=1){
+                    if(neigh_row<0|| neigh_row>=m || neigh_col<0 || neigh_col>=n || grid[neigh_row][neigh_col]!=1){//if out of bounds or not a fresh roange, skip
                         continue;
                     }   
                     grid[neigh_row][neigh_col]=2;//rot it
