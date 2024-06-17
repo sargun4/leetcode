@@ -10,16 +10,16 @@ public:
             for(int i=0;i<n;i++){
                 TreeNode* temp=q.front();
                 q.pop(); 
-                if(temp!=NULL and (temp->val%2)==0 and temp->left!=NULL and temp->left->left!=NULL){
+                if(temp!=NULL && (temp->val%2)==0 && temp->left!=NULL && temp->left->left!=NULL){
                     sum=sum+temp->left->left->val;	
                 } 	
-                if(temp!=NULL and (temp->val%2)==0 and temp->left!=NULL and temp->left->right!=NULL){
+                if(temp!=NULL && (temp->val%2)==0 && temp->left!=NULL && temp->left->right!=NULL){
                     sum=sum+temp->left->right->val;
                 }
-                if(temp!=NULL and (temp->val%2)==0 and temp->right!=NULL and temp->right->left!=NULL){
+                if(temp!=NULL && (temp->val%2)==0 && temp->right!=NULL && temp->right->left!=NULL){
                     sum=sum+temp->right->left->val;
                 }
-                if(temp!=NULL and (temp->val%2)==0 and temp->right!=NULL and temp->right->right!=NULL){
+                if(temp!=NULL && (temp->val%2)==0 && temp->right!=NULL && temp->right->right!=NULL){
                     sum=sum+temp->right->right->val;
                 }
                 if(temp->left!=NULL){
