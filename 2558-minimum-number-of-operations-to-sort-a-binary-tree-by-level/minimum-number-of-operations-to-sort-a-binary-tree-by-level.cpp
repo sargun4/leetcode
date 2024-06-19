@@ -6,15 +6,16 @@ public:
         queue<TreeNode*> q;
         q.push(root);
         while (!q.empty()) {
-            int len = q.size();
+            int n = q.size();
             vector<int> v;
-            while (len--) {
+            while (n--) {
                 root = q.front();
                 q.pop();
                 v.push_back(root->val);
                 if(root->left)
                     q.push(root->left);
-                if(root->right) q.push(root->right);
+                if(root->right) 
+                    q.push(root->right);
             }
             unordered_map<int, int> map;
             for (int i=0; i<v.size(); i++)
