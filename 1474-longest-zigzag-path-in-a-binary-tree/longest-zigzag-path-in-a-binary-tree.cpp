@@ -1,0 +1,56 @@
+// class Solution {//dfs
+// public:
+// int ans;
+//     void solve(TreeNode* root,bool flag,int ctr){
+//         if(!root) return;
+//         ans=max(ans,ctr);
+//         if(flag){
+//              solve(root->left,!flag,ctr+1);
+//              solve(root->right,1,1);
+//         }else{
+//               solve(root->right,!flag,ctr+1);
+//              solve(root->left,0,1);
+
+//         }
+//     }
+//     int longestZigZag(TreeNode* root) {
+//         ans=0;
+//         solve(root->left,0,1);
+//         solve(root->right,1,1);
+//         return ans;
+//     }
+// };
+
+//bfs
+class Solution {
+public:
+    int longestZigZag(TreeNode* root) {
+        int ans = 0;
+        queue<pair<TreeNode*,pair<int,int>>>q; //{node, {ans, dir}}
+        q.push({root, {0, 0}});
+        while(!q.empty()){
+            auto p = q.front();
+            q.pop();
+            TreeNode* node = p.first;
+            int curr = p.second.first;
+            int dir = p.second.second;
+
+            ans = max(ans, curr);
+
+            if(node->left){
+                if(dir==1) //if right-to-left,
+
+                    q.push({node->left, {curr+1, -1}}); //enqueue left child w (curr + 1) & dirn -1.
+                else
+                    q.push({node->left, {1, -1}});//enqueue left child w a path length of 1 & dirn -1.
+            }
+            if(node->right){
+                if(dir==-1)  //left-to-right,
+                    q.push({node->right, {curr+1, 1}});//enqueue right child w (curr + 1) & dirn 1.
+                else
+                    q.push({node->right, {1, 1}});//enqueue right child w a path length of 1 & dirn 1.
+            }
+        }
+        return ans;
+    }
+};
