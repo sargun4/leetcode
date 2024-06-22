@@ -32,21 +32,20 @@ public:
             auto p = q.front();
             q.pop();
             TreeNode* node = p.first;
-            int curr = p.second.first;
+            int ctr = p.second.first;
             int dir = p.second.second;
 
-            ans = max(ans, curr);
+            ans = max(ans, ctr);
 
             if(node->left){
-                if(dir==1) //if right-to-left,
-
-                    q.push({node->left, {curr+1, -1}}); //enqueue left child w (curr + 1) & dirn -1.
+                if(dir==1) //if right-to-left, 
+                    q.push({node->left, {ctr+1, -1}}); //enqueue left child w (ctr + 1) & dirn -1.
                 else
                     q.push({node->left, {1, -1}});//enqueue left child w a path length of 1 & dirn -1.
             }
             if(node->right){
                 if(dir==-1)  //left-to-right,
-                    q.push({node->right, {curr+1, 1}});//enqueue right child w (curr + 1) & dirn 1.
+                    q.push({node->right, {ctr+1, 1}});//enqueue right child w (ctr + 1) & dirn 1.
                 else
                     q.push({node->right, {1, 1}});//enqueue right child w a path length of 1 & dirn 1.
             }
