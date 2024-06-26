@@ -2,7 +2,7 @@
 class Solution {
 private:
     void inorder(TreeNode* root, vector<int>& in){
-        if(root == NULL){
+        if(root==NULL){
             return ;
         }
         inorder(root->left, in);
@@ -13,17 +13,16 @@ private:
         if(s>e){
             return NULL; 
         } 
-        int mid  = (s+e)/2; 
+        int mid= (s+e)/2; 
         TreeNode* root = new TreeNode(inorderVal[mid]);
-        root->left = inorderToBst(s, mid-1, inorderVal);
-        root->right = inorderToBst( mid +1, e, inorderVal); 
+        root->left = inorderToBst(s,mid-1,inorderVal);
+        root->right = inorderToBst(mid+1,e,inorderVal); 
         return root; 
     }
 public:
     TreeNode* balanceBST(TreeNode* root) { 
         vector<int> inorderVal;
-        inorder(root , inorderVal); 
+        inorder(root,inorderVal); 
         return inorderToBst(0, inorderVal.size()-1, inorderVal);
-
     }
 };
