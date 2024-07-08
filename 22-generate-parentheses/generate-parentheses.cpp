@@ -1,39 +1,4 @@
  
-#include <bits/stdc++.h>
-using namespace std; 
-// class Solution {
-// public:
-//     vector<string> res;
-//     bool isvalid(string str){
-//         int ctr=0;
-//         for(char ch:str){
-//             if(ch=='(') ctr++;
-//             else ctr--;
-//             if(ctr<0) return false;
-//         }
-//         return ctr==0;
-//     }
-//     void solve(string &curr,int n){
-//         if(curr.length()==2*n){
-//             if(isvalid(curr)){
-//                 res.push_back(curr);
-//             }
-//             return;
-//         }
-//         curr.push_back('(');
-//         solve(curr,n);
-//         curr.pop_back();
-        
-//         curr.push_back(')');
-//         solve(curr,n);
-//         curr.pop_back();
-//     }
-//     vector<string> generateParenthesis(int n) {
-//         string curr="";
-//         solve(curr,n);
-//         return res;
-//     }
-// };
 class Solution {
 public:
     void comb(int open,int close,vector<string> &res,string str){
