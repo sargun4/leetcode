@@ -1,11 +1,11 @@
 class Solution {
     unordered_map<int,int> del;
     TreeNode* dfs(TreeNode* root, queue<TreeNode*>& q){
-        if(root == NULL)return NULL;
+        if(root == NULL) return NULL;
         int value = root->val;
         if(del[value]){
-            if(root->left)q.push(root->left);
-            if(root->right)q.push(root->right);
+            if(root->left) q.push(root->left);
+            if(root->right) q.push(root->right);
             return NULL;
         }
         root->left = dfs(root->left,q);
@@ -22,7 +22,8 @@ public:
         q.push(root);
 
         while(!q.empty()){
-            TreeNode* node = q.front(); q.pop();
+            TreeNode* node = q.front();
+             q.pop();
             if(del[node->val]){
                 if(node->left) q.push(node->left);
                 if(node->right) q.push(node->right);
