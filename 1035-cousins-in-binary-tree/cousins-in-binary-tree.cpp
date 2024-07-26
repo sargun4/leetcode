@@ -26,10 +26,10 @@ public:
                 if(node->val==y) f2=true;
                 //checking if parent is same
                 if(node->left && node->right){
-                if((node->left->val==x && node->right->val==y)|| 
-                 (node->left->val==y && node->right->val==x))
-                    return false;
-                }
+                    if((node->left->val==x && node->right->val==y)|| 
+                    (node->left->val==y && node->right->val==x))
+                        return false;
+                    }
                 if(node->left)
                     q.push(node->left);
                 if(node->right)
