@@ -1,46 +1,23 @@
- 
 class Solution {
 public:
-    void comb(int open,int close,vector<string> &res,string str){
-        if (open == 0 and close == 0){
-            res.push_back(str);
+    void backtrack(vector<string>& ans, string s, int open, int close, int n) {
+        if (s.size() == 2 * n) {
+            ans.push_back(s);
             return;
         }
-        if (open > 0){
-            str.push_back('(');
-            comb(open-1,close,res,str);
-            str.pop_back();
-        }
-        if (close > 0 && close>open){
-            str.push_back(')');
-            comb(open,close-1,res,str);
-            str.pop_back();
-        } 
+        
+        if (open < n) 
+            backtrack(ans, s + '(', open + 1, close, n);
+        
+        if (close < open) 
+            backtrack(ans, s + ')', open, close + 1, n);
     }
+
     vector<string> generateParenthesis(int n) {
-        vector<string> res;
-        string val="";
-        comb(n,n,res,val);
-        return res;
+        vector<string> ans;
+        backtrack(ans, "", 0, 0, n);
+        return ans;
     }
 };
-// class Solution {
-// public:
-//     void comb(int open,int close,vector<string> &res,string str){
-//         if (open == 0 and close == 0){
-//             res.push_back(str);
-//             return;
-//         }
-//         if (open > 0){
-//             comb(open-1,close,res,str+"(");
-//         }
-//         if (close > 0 && close>open){
-//             comb(open,close-1,res,str+")");
-//         } 
-//     }
-//     vector<string> generateParenthesis(int n) {
-//         vector<string> res;
-//         comb(n,n,res,"");
-//         return res;
-//     }
-// };
+
+
