@@ -89,8 +89,6 @@ public:
         }
         return res;
     }
-
-private:
     // Build adjacency list
     vector<vector<int>> getAdj(const vector<vector<int>>& edges, int n) {
         vector<vector<int>> adj(n);
@@ -116,10 +114,10 @@ private:
             if (mark[node] == 0) zeroMarkedCtr++;
             else oneMarkedCtr++;
 
-            for (int neighbor : adj[node]) {
-                if (mark[neighbor] == -1) {
-                    mark[neighbor] = 1 - mark[node];  // Alternate mark
-                    q.push(neighbor);
+            for (int neigh : adj[node]) {
+                if (mark[neigh] == -1) {
+                    mark[neigh] = 1 - mark[node];  // Alternate mark
+                    q.push(neigh);
                 }
             }
         }
