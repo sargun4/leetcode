@@ -1,7 +1,7 @@
 class Solution {
 public:
     int partitionArray(vector<int>& nums, int k) {
-        sort(nums.begin(),nums.end());//asc order
+        sort(nums.begin(),nums.end());//asc order-O(n log n)
         int n=nums.size();
         int ans=1;//min 1 subseq reqd.
         int min=nums[0];//1st elmnt initally the min cuz asc ordered
