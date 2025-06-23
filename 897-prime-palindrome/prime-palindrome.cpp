@@ -34,21 +34,18 @@ public:
         }
         //loop indefinitely until we find a prime palindrome
         while (true) {
-            // Skip even-length palindromes as they are divisible by 11
+            //skip even-len palindromes as they are divisible by 11
             int len=to_string(ans).size();
-            if (len % 2 == 0) {
-                ans = pow(10, len); // Move to next power of 10 (odd-length)
+            if (len % 2 == 0){
+                ans = pow(10, len); //move to next power of 10 (odd-len)
                 continue;
             }
-
-            // If ans is both prime and palindrome, return it
+            //if ans is both prime and palind, return it
             if (isPalind(ans) && findPrime(ans)) {
                 return ans;
             }
-
-            ans++; // Try next number
+            ans++; //next no
         }
-
-        return -1; // Unreachable, safety return
+        return -1; //unreachabl
     }
 };
