@@ -2,32 +2,33 @@ class Solution {
 public:
     double mincostToHireWorkers(vector<int>& quality, vector<int>& wage, int k) {
         int n=quality.size();
-        double res=DBL_MAX;
-        vector<pair<double,int>> worker_ratio(n);
-
-        for(int worker=0; worker<n; worker++){
-            worker_ratio[worker] = make_pair((double)wage[worker]/quality[worker],quality[worker]);
+        vector<pair<double,int>> wageToQualityRatio;//{ratio,quality}
+        for(int i=0;i<n;i++){
+            double ratio = (double)wage[i] / quality[i] ;
+            wageToQualityRatio.push_back({ratio, quality[i]});
         }
-        sort(begin(worker_ratio), end(worker_ratio));
+        sort(begin(wageToQualityRatio),end(wageToQualityRatio));
 
-        int sumquality = 0;
-        priority_queue<int,vector<int>>pq;
-        for(int i=0;i<k;i++){
-            pq.push(worker_ratio[i].second);
-            sumquality+=worker_ratio[i].second;
-        }
-        double managerRatio=worker_ratio[k-1].first;
-        res=managerRatio*sumquality;
-        for(int manager=k; manager<n; manager++){
-            double managerRatio=worker_ratio[manager].first;
-            pq.push(worker_ratio[manager].second);
-            sumquality+=worker_ratio[manager].second;
+        double sum_quality=0;
+        double mincost=DBL_MAX;
+        //max-heap to keep track of top k smallest qualities
+        priority_queue<int> pq;
+        for(int i=0;i<n;i++){
+            double ratio=wageToQualityRatio[i].first;
+            int quality=wageToQualityRatio[i].second;
+
+            pq.push(quality);
+            sum_quality+=quality;
+            //if more than k workers,remove highest quality one
             if(pq.size()>k){
-                sumquality-=pq.top();
+                sum_quality-=pq.top();
                 pq.pop();
             }
-            res=min(res,managerRatio*sumquality);
+            // if exactly k,get totalcost which is min
+            if(pq.size()==k){
+                mincost=min(mincost,sum_quality*wageToQualityRatio[i].first);
+            }
         }
-        return res;
+        return mincost;
     }
 };
