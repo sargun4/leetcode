@@ -15,6 +15,7 @@ public:
         }
         vector<vector<bool>> vis(m,vector<bool>(n,false));
         //pq ordered by minimum time to reach each cell
+        //dijkstras algo
         priority_queue<vector<int>, vector<vector<int>>, greater<>> pq;//{time,row,col};
         pq.push({grid[0][0],0,0});
         while(!pq.empty()){
@@ -49,6 +50,6 @@ public:
                 pq.push({nextTime,nr,nc});
             }
         }
-        return 0;
+        return -1;
     }
 };
