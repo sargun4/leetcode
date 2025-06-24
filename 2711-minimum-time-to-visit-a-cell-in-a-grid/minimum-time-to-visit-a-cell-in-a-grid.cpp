@@ -36,7 +36,7 @@ public:
             for(auto &d:dirns){
                 int nr=x+d[0];
                 int nc=y+d[1];
-                if(!isvalid(nr,nc,m,n)){
+                if(!isvalid(nr,nc,m,n)){//out of bounds
                     continue;
                 }
                 //calc wait time req to move to next cell
