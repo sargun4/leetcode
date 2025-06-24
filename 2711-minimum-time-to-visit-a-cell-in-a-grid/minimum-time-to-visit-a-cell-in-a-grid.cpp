@@ -9,7 +9,7 @@ public:
     int minimumTime(vector<vector<int>>& grid) {
         int m=grid.size();
         int n=grid[0].size();
-        // If both initial moves require more than 1 second, impossible togo fwd
+        //if both initial moves require > 1 sec, impossible togo fwd
         if(grid[0][1]>1 && grid[1][0]>1){
             return -1;
         }
