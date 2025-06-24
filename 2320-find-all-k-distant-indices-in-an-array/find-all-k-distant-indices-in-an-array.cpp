@@ -8,7 +8,7 @@ public:
             if (nums[j]==key) {
                 int start=max(0,j-k);
                 int end=min(j+k,n-1);
-                //avoid adding duplicates: skip already added indices
+                //skippin alr added indices
                 if (!res.empty() && lastAdded>=start){
                     start=lastAdded+1;
                 }
