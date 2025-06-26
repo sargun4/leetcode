@@ -47,7 +47,7 @@ public:
                             pq.push({currdist, nx, ny});
                         }
                 }
-                charToCoordMap.erase(matrix[x][y]); // clean up used teleporters
+                // charToCoordMap.erase(matrix[x][y]); // clean up used teleporters
             }
             for(auto &d:dirns){
                 int nr=x+d[0];//next
