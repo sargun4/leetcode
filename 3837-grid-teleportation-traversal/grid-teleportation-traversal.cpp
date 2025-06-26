@@ -1,63 +1,63 @@
 class Solution {
 public:
-    bool isValid(int i, int j, int n, int m, vector<string> &matrix) {
-        if(i < 0 || j < 0 || i >= n || j >= m) return false;
-        if(matrix[i][j] == '#') return false;
+    bool isValid(int i,int j,int m,int n,vector<string> &matrix){
+        if(i<0 || i>=m || j<0 || j>=n) return false;
+        if(matrix[i][j]=='#') return false;
         return true;
     }
-    
-    int minMoves(vector<string> &matrix) {
-        int n = matrix.size(), m = matrix[0].size();
-
-        unordered_map<char, vector<pair<int, int>>> cells;
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < m; j++) {
-                if(matrix[i][j] != '.' && matrix[i][j] != '#') {
-                    cells[matrix[i][j]].push_back({i, j});
+    vector<vector<int>> dirns={{1,0},{-1,0},{0,1},{0,-1}};
+    int minMoves(vector<string>& matrix) {
+        int m=matrix.size(); int n=matrix[0].size();
+        //map fr each teleporter char('A'-'Z') to all its coords
+        unordered_map<char,vector<pair<int,int>>> charToCoordMap;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(matrix[i][j]!='.' && matrix[i][j]!='#'){
+                    charToCoordMap[matrix[i][j]].push_back({i,j});
                 }
             }
         }
 
-        if(matrix[n - 1][m - 1] == '#') return -1;
+        if(matrix[m-1][n-1]=='#') return -1; //unreachable bottom right since its an obstcle
+        //min heap-dijkstra
+        using T=tuple<int,int,int>;
+        priority_queue<T,vector<T>,greater<T>> pq;//{moves,row,col}
+        //dist matrix: min moves to reach each cell
+        vector<vector<int>> dist(m,vector<int>(n,INT_MAX));
+        unordered_set<char> used;//to track the char-use only once
 
-        priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<tuple<int, int, int>>> pq;
-        vector<vector<int>> dist(n, vector<int> (m, INT_MAX));
-        unordered_set<char> used;
-        
-        pq.push({0, 0, 0});
-        dist[0][0] = 0;
-
-        int dx[4] = {0, 0, -1, 1};
-        int dy[4] = {-1, 1, 0, 0};
-
-        while(!pq.empty()) {
-            auto [curDist, x, y] = pq.top();
-            pq.pop();
-            
-            if(curDist > dist[x][y]) continue;
-            if(x == n - 1 && y == m - 1) return curDist;
-
+        int moves=0;
+        pq.push({moves,0,0});
+        dist[0][0]=0;
+        while(!pq.empty()){
+            auto [currdist,x,y]=pq.top(); pq.pop();
+            // int currdist=curr[0];
+            // int x=curr[1];
+            // int y=curr[2];
+            if(currdist>dist[x][y]) continue;
+            if(x==m-1 && y==n-1){//reache bottom right cell
+                return currdist;
+            }
             if(isupper(matrix[x][y]) && used.find(matrix[x][y]) == used.end()) {
-                used.insert(matrix[x][y]);
-
-                for(auto &[newX, newY]: cells[matrix[x][y]]) {
-                    if(curDist < dist[newX][newY]) {
-                        dist[newX][newY] = curDist;
-                        pq.push({curDist, newX, newY});
-                    }
+                used.insert(matrix[x][y]);//mark teleport used
+                for(auto &[nx,ny]: charToCoordMap[matrix[x][y]]) {
+                    //teleport to all other matching letters at 0 cost
+                    if((nx!=x|| ny!=y) && currdist<dist[nx][ny]) {
+                            dist[nx][ny] = currdist;
+                            pq.push({currdist, nx, ny});
+                        }
                 }
+                charToCoordMap.erase(matrix[x][y]); // clean up used teleporters
             }
-            
-            for(int k = 0; k < 4; k++) {
-                int nextX = x + dx[k], nextY = y + dy[k];
-                
-                if(isValid(nextX, nextY, n, m, matrix) && curDist + 1 < dist[nextX][nextY]) {
-                    dist[nextX][nextY] = curDist + 1;
-                    pq.push({curDist + 1, nextX, nextY});
+            for(auto &d:dirns){
+                int nr=x+d[0];//next
+                int nc=y+d[1];
+                if(isValid(nr,nc,m,n,matrix) && currdist+1<dist[nr][nc]){
+                    dist[nr][nc]=currdist+1;
+                    pq.push({currdist+1,nr,nc});
                 }
             }
         }
-
         return -1;
     }
 };
