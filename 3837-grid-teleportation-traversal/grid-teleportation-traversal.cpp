@@ -38,7 +38,7 @@ public:
             if(x==m-1 && y==n-1){//reache bottom right cell
                 return currdist;
             }
-            if(isupper(matrix[x][y]) && used.find(matrix[x][y]) == used.end()) {
+            if(isupper(matrix[x][y]) && used.find(matrix[x][y]) == used.end()){//if char isupper and not yet used
                 used.insert(matrix[x][y]);//mark teleport used
                 for(auto &[nx,ny]: charToCoordMap[matrix[x][y]]) {
                     //teleport to all other matching letters at 0 cost
@@ -58,6 +58,6 @@ public:
                 }
             }
         }
-        return -1;
+        return -1;//unreachabl
     }
 };
