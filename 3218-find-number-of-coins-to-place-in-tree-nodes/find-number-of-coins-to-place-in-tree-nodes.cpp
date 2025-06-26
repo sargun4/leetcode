@@ -8,6 +8,8 @@ public:
     vector<ll> coins;
 
     // Merge two vectors and keep only top 3 largest and 2 smallest values
+    //2 smallest(for possible -ve × -ve × +ve)
+    //3 largest(for +ve × +ve × +ve)
     vector<ll> mergeAndTrim(vector<ll>& a, vector<ll>& b) {
         vector<ll> all = a;
         all.insert(all.end(), b.begin(), b.end());
@@ -25,22 +27,25 @@ public:
 
         return trimmed;
     }
-
-    vector<ll> dfs(int src, int parent) {
+    //dfs to traverse the tree in postorder and compute max product of 3 costs in subtree
+    vector<ll> dfs(int src, int parent){
+        //start with the cost of the current node itself
         vector<ll> vals = {(ll)cost[src]};
 
         for (int child : graph[src]) {
+        //avoid going back to parent in undirected graph
             if (child == parent) continue;
             vector<ll> sub = dfs(child, src);
+            //merge child's values into current node's list and keep only top 5 relevant ones
             vals = mergeAndTrim(vals, sub);
         }
 
-        // Calculate coin value
+        //calc coin value
         int len = vals.size();
         if (len < 3) {
-            coins[src] = 1;
+            coins[src] = 1;//if <3 nodes,place 1 coin;
         } else {
-            // Check max product of any 3 from selected 5 values
+            //max prod of any 3 from selected 5 values
             ll maxProd = 0;
             for (int i = 0; i < len; ++i) {
                 for (int j = i + 1; j < len; ++j) {
@@ -50,6 +55,7 @@ public:
                     }
                 }
             }
+    //if maxProd> 0, place that many coins; otherwise 0 coins
             coins[src] = maxProd > 0 ? maxProd : 0;
         }
 
