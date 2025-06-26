@@ -26,6 +26,7 @@ public:
     int countPaths(vector<vector<int>>& grid) {
         int m=grid.size();
         int n=grid[0].size();
+        //dp[i][j]=no of increasing paths starting at (i, j)
         vector<vector<int>> dp(m,vector<int>(n,-1));
         long long ctr=0;
         for(int i=0;i<m;i++){
