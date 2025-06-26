@@ -1,61 +1,53 @@
  //a camera node can monitor 4nodes-itself,its parent & its left n right children; 
-
 class Solution {
 public:
-    enum State { NOT_COVERED, HAS_CAMERA, COVERED };
+    unordered_map<TreeNode*, vector<TreeNode*>> graph;
+    unordered_map<TreeNode*, bool> visited;
 
-    void buildGraph(TreeNode* node, TreeNode* parent,
-                    unordered_map<TreeNode*, vector<TreeNode*>>& graph) {
+    void buildGraph(TreeNode* node, TreeNode* parent) {
         if (!node) return;
         if (parent) {
             graph[node].push_back(parent);
             graph[parent].push_back(node);
         }
-        buildGraph(node->left, node, graph);
-        buildGraph(node->right, node, graph);
+        buildGraph(node->left, node);
+        buildGraph(node->right, node);
+    }
+
+    int dfs(TreeNode* node, TreeNode* parent, int &cameraCount) {
+        visited[node] = true;
+        bool hasChildNotCovered = false;
+        bool hasChildWithCamera = false;
+
+        for (TreeNode* neighbor : graph[node]) {
+            if (neighbor == parent || visited[neighbor]) continue;
+
+            int childState = dfs(neighbor, node, cameraCount);
+            if (childState == 0) hasChildNotCovered = true;
+            if (childState == 1) hasChildWithCamera = true;
+        }
+
+        if (hasChildNotCovered) {
+            cameraCount++;
+            return 1; // Place camera here
+        }
+        if (hasChildWithCamera) {
+            return 2; // This node is covered
+        }
+        return 0; // This node is not covered
     }
 
     int minCameraCover(TreeNode* root) {
         if (!root) return 0;
 
-        unordered_map<TreeNode*, vector<TreeNode*>> graph;
-        buildGraph(root, nullptr, graph);
+        buildGraph(root, nullptr);
+        int cameraCount = 0;
 
-        unordered_map<TreeNode*, int> state;
-        unordered_set<TreeNode*> visited;
-
-        function<int(TreeNode*, TreeNode*)> dfs = [&](TreeNode* node, TreeNode* parent) -> int {
-            int childrenCameraCount = 0;
-            bool childNotCovered = false;
-
-            for (TreeNode* neighbor : graph[node]) {
-                if (neighbor == parent) continue;
-                int childState = dfs(neighbor, node);
-                if (childState == NOT_COVERED) childNotCovered = true;
-                if (childState == HAS_CAMERA) childrenCameraCount++;
-            }
-
-            if (childNotCovered) {
-                state[node] = HAS_CAMERA;
-                return HAS_CAMERA;
-            }
-            if (childrenCameraCount > 0) {
-                state[node] = COVERED;
-                return COVERED;
-            }
-            state[node] = NOT_COVERED;
-            return NOT_COVERED;
-        };
-
-        int cameras = 0;
-        if (dfs(root, nullptr) == NOT_COVERED) {
-            cameras++;
+        int rootState = dfs(root, nullptr, cameraCount);
+        if (rootState == 0) {
+            cameraCount++; // Root needs camera
         }
 
-        for (auto& [node, val] : state) {
-            if (val == HAS_CAMERA) cameras++;
-        }
-
-        return cameras;
+        return cameraCount;
     }
 };
