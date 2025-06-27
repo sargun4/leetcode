@@ -5,17 +5,18 @@ public:
     bool isSubseq(string&s,string&sub,int k){
         int i=0; int j=0; int L=sub.length(); int n=s.length();
         while(i<n && j<k*L){
-            if(s[i]==sub[j%L]){
-                j++;
+            if(s[i]==sub[j%L]){//matched one char of sub
+                j++;//move in sub
             }
-            i++;
+            i++;//move ahead in s regardless
         }
+        //if we matched all k * L chars, its a valid subseq;
         return j==k*L;
     }
     void backtrack(string &s,string&curr,vector<bool> &canUse,vector<int> &reqFreq,int k,int maxlen){
         int len=curr.length();
-        if(len>maxlen) return;
-        //check if curr string repeated k times is a subseq            
+        if(len>maxlen) return;//if curr string too long stop exploring;
+        //check if curr string repeated k times is a subseq & better than curr best      
         if(((len>res.length()) || (len==res.length() && curr>res)) && isSubseq(s,curr,k)){
             res=curr;
         }
@@ -25,7 +26,7 @@ public:
                 char ch=i+'a';
                 curr.push_back(ch);
                 reqFreq[i]--;
-                //explreo
+                //explore w this charr added
                 backtrack(s,curr,canUse,reqFreq,k,maxlen);
                 //undo
                 curr.pop_back();
@@ -40,10 +41,10 @@ public:
             freq[ch-'a']++;
         }
         vector<bool> canUse(26,false);
-        vector<int> reqFreq(26,0);
+        vector<int> reqFreq(26,0);//max no of times each char can appear in x
         for(int i=0;i<26;i++){
             if(freq[i]>=k){
-                canUse[i]=true;
+                canUse[i]=true;//if char can be used
                 reqFreq[i]=freq[i]/k;//atmost this can be used in a subseq
             }
         }
