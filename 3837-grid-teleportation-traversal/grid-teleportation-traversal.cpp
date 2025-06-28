@@ -1,8 +1,8 @@
 class Solution {
 public:
     bool isValid(int i,int j,int m,int n,vector<string> &matrix){
-        if(i<0 || i>=m || j<0 || j>=n) return false;
-        if(matrix[i][j]=='#') return false;
+        if(i<0 || i>=m || j<0 || j>=n) return false;//out of bounds
+        if(matrix[i][j]=='#') return false;//obstcle
         return true;
     }
     vector<vector<int>> dirns={{1,0},{-1,0},{0,1},{0,-1}};
@@ -41,8 +41,8 @@ public:
             if(isupper(matrix[x][y]) && used.find(matrix[x][y]) == used.end()){//if char isupper and not yet used
                 used.insert(matrix[x][y]);//mark teleport used
                 for(auto &[nx,ny]: charToCoordMap[matrix[x][y]]) {
-                    //teleport to all other matching letters at 0 cost
-                    if((nx!=x|| ny!=y) && currdist<dist[nx][ny]) {
+                    //teleport to all other matching letters at 0 cost 
+                    if((nx!=x|| ny!=y) && currdist<dist[nx][ny]){//check if currdist less than prev
                             dist[nx][ny] = currdist;
                             pq.push({currdist, nx, ny});
                         }
