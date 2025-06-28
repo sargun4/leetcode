@@ -9,7 +9,7 @@ public:
     vector<vector<int>> adj;
     vector<bool> vis;
     int maxincome=INT_MIN;
-    unordered_map<int,int> bobPath;
+    unordered_map<int,int> bobPath;//{node,time to reach it} for bob
     int mostProfitablePath(vector<vector<int>>& edges, int bob, vector<int>& amount) {
         int n=amount.size();
         adj.resize(n);
@@ -31,17 +31,20 @@ public:
             int src=curr[0];
             int time=curr[1];
             int income=curr[2];
-                        //mark n remove curr nde
+            //mark n remove curr nde
             vis[src]=true;
             q.pop();
+
             // /alice reaches the node first
-            if(bobPath.find(src)==bobPath.end() || time<bobPath[src]){
+            if(bobPath.find(src)==bobPath.end() || time<bobPath[src]){//either bob isnt able to reach that node or time req by alice to reach that node is lesser than bob's time to reach it
                 income+=amount[src];
             }
             //alice n bob reach node at same time;
             else if(time==bobPath[src]){
                 income+=(amount[src]/2);
             }
+            //else bob was earlier-income unchanged
+
             //update max val if curr node is a new leaf;
             if(adj[src].size()==1 && src!=0){
                 maxincome=max(maxincome,income);
