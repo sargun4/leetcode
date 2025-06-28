@@ -10,16 +10,18 @@ public:
         queue<int> q;
         q.push(0);
         vis[0]=true;
-        int ctr=1;
-        set<int> restr;
-        for(int i:restricted){
-            restr.insert(i);
-        }
-        while(!q.empty()){
+        int ctr=1;//since node 0 is alwys reachable
+        // set<int> restr;
+        // for(int i:restricted){
+        //     restr.insert(i);
+        // }
+        //OR
+        unordered_set<int> restr(restricted.begin(), restricted.end());
+        while(!q.empty()){//BFS to count reachable nodes from node 0
             int node=q.front(); q.pop();
-            //ctr+=1;
+        
             for(auto &neigh:adj[node]){
-                //neigh not yet vis n not in restriced nodes
+                //if neigh not yet vis n not in restriced nodes,visit and push
                 if(!vis[neigh] && restr.find(neigh)==restr.end()){
                     vis[neigh]=true;
                     q.push(neigh);
