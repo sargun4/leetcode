@@ -10,16 +10,20 @@ public:
         vector<bool> vis(n,false);
         for(int i=0;i<n;i++){
             if(!vis[i]){
-                vector<int> comp;
-                bfs(i,adj,comp,vis);
+                vector<int> comp;//store all nodes in this component
+                bfs(i,adj,comp,vis);//bfs to fill this componen
                 bool iscomp=true;
                 for(auto neigh:comp){
+                    //in a complete component w k nodes, each node has degree k - 1
+        //     in a complete graph:
+        //each node connects to every other node in the component.
+        //so in a k-node component, every node must have k-1 edges.
                     if(adj[neigh].size()!=comp.size()-1){
                         iscomp=false;
                         break;
                     }
                 }
-                if(iscomp) ans++;
+                if(iscomp) ans++;//complete comp
             }
         }
         return ans;
