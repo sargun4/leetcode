@@ -43,6 +43,8 @@ public:
                     q2.push(i);
                 }
             }
+
+            // 2nd bfs
             while(!q2.empty()){
                 int node=q2.front();
                 q2.pop();
