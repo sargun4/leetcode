@@ -26,6 +26,7 @@ public:
             if(x==m-1 && y==n-1){//reached bottom right cell
                 if(currhealth>=1) return true;//reach it w a health value of >=1
             }
+            
             for(auto d:dirns){
                 int nx=x+d[0];
                 int ny=y+d[1];
