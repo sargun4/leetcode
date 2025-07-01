@@ -10,7 +10,7 @@ class Solution {
         int m=grid.size();
         int n=grid[0].size();
         int time=0,total=0,ctr=0;
-        queue<pair<int,int>> rotten;
+        queue<pair<int,int>> rotten;//rotten oranges coords at t=0 {x,y}
         for(int i=0;i<m;++i){
             for(int j=0;j<n;++j){
                 if(grid[i][j]!=0) total++; //total count of fresh & rotten oranges
