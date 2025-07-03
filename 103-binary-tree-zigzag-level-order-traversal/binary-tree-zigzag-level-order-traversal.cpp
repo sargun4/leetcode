@@ -3,18 +3,18 @@ public:
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
         vector<vector<int>> res;
         if(root==NULL) return res;
-        queue<TreeNode*> q;
+        queue<TreeNode*> q;//bfs
         q.push(root);
-        bool flag=true;
+        bool flag=true;//for rev order
         while(!q.empty()){
-            int size=q.size();
-            vector<int> row(size);
-            for(int i=0;i<size;i++){
+            int n=q.size();//no of nodes in that lvl
+            vector<int> row(n);//each row/lvl in tree
+            for(int i=0;i<n;i++){
                 TreeNode* node=q.front();
                 q.pop();
-                //find position to fill node's val
-                int idx=(flag) ? i:(size-1-i); //if flag is true, store in row in normal order ; else store in rev order; 
-                row[idx]=node->val;
+                //position to fill node's val
+                int idx=(flag) ? i:(n-1-i); //if flag is true, store in row in normal order ; else store in rev order; 
+                row[idx]=node->val;//store nodes val at that idx
                 if(node->left){
                     q.push(node->left);
                 }
@@ -22,7 +22,7 @@ public:
                     q.push(node->right);
                 }
             }
-            //after each lvl,zigzag
+            //after each lvl,alt order
             flag=!flag;
             res.push_back(row);
         }
