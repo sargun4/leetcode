@@ -31,7 +31,7 @@ public:
             }
         }
         //get freq of watched videos from target lvl frnds
-        unordered_map<string,int> map;//{vid:freq};
+        unordered_map<string,int> map;//{vid_name:freq};
         for(int frnd_id:targetLvlFrnds){
             for(string &vid:watchedVideos[frnd_id]){
                 map[vid]++;//freq of each vid wathced at that lvl 
