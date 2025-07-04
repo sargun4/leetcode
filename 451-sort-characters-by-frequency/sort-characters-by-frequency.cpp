@@ -9,13 +9,13 @@ public:
         }
     };
     string frequencySort(string s) {
-        priority_queue<p,vector<p>,lambda> pq;
+        priority_queue<p,vector<p>,lambda> pq;//maxheap- desc ordr-max freq at top
         unordered_map<char,int> map;
         //freq updated in map
         for(char &ch:s){
             map[ch]++;
         }
-        //fill in heap frm map
+        //fill in max heap frm map
         for(auto &it:map){
             pq.push({it.first,it.second});
         }
