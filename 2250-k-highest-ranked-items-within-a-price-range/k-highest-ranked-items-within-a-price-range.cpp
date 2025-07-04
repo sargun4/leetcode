@@ -1,20 +1,24 @@
 //0-wall, 1-empty, other grid vals-prices
 //pricing = [low, high]
-//1.do bfs frm start cell- to get dist frm cells that r reachable with price range [l,h]
-//2.store these coords in pq;
-
+//1.do bfs frm start cell- to get dist frm cells.
+//2.Collect only those cells that r reachable (not blocked by walls) & hv a price within range[low, high]
+//use a min-heap (priority queue) with a custom comparator to keep the top k highest-ranked items in this order:
+//1.shorter distance
+// 2.lower price
+// 3.smaller row idx
+// 4.smaller column idx
 class Solution {
 public:
     //comparator for min-heap
     struct compare {
         bool operator()(const vector<int>& a, const vector<int>& b) {
-            // Lower distance has higher priority
+            //lower distance has higher priority
             if (a[0] != b[0]) return a[0] < b[0];
-            // Lower price has higher priority
+            //lower price has higher priority
             if (a[1] != b[1]) return a[1] < b[1];
-            // Lower row index has higher priority
+            //lower row index has higher priority
             if (a[2] != b[2]) return a[2] < b[2];
-            // Lower column index has higher priority
+            //lower column index has higher priority
             return a[3] < b[3];
         }
     };
@@ -36,7 +40,7 @@ public:
         //minheap-store {dist_frm_start,price,x,y};
         priority_queue<vector<int>,vector<vector<int>>,compare> pq;
         
-        while(!q.empty()){
+        while(!q.empty()){//
             int len=q.size();
             while(len--){
                 auto curr=q.front(); q.pop();
@@ -61,6 +65,7 @@ public:
             dist++;//inc dist lvl for next bfs layer
         }
         vector<vector<int>> ans;
+//extract top-k elmnts frm minheap
         while(!pq.empty()){
             auto curr=pq.top(); pq.pop();
             int x=curr[2];
