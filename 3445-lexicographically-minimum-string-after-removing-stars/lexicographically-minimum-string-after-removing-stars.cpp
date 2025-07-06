@@ -1,25 +1,26 @@
 class Solution {
 public:
-    typedef pair<char,int> p;
+    typedef pair<char,int> p;//{char,idx}
 
-    struct comp{
+    struct comp{//comparator
         bool operator()(p&p1,p&p2){
-            if(p1.first==p2.first){
+            if(p1.first==p2.first){//if chars are equal, higher idx shd be given more priority
                 return p1.second<p2.second;
             }
-            return p1.first>p2.first;
+            return p1.first>p2.first;//smaller char at top of pq
         }
     };
     string clearStars(string s) {
         int n=s.length();
-        priority_queue<p,vector<p>,comp> pq;
-        for(int i=0;i<n;i++){
+    //minheap-smallest char at top,incase of tie- largest idx at top shd be there
+        priority_queue<p,vector<p>,comp> pq;//{char:idx}
+        for(int i=0;i<n;i++){//goin over all chars in str
             if(s[i]!='*'){
                 pq.push({s[i],i});
-            }else{
+            }else{//star at that char
                 int idx=pq.top().second;
                 pq.pop();
-                s[idx]='*';
+                s[idx]='*';//char to now be deleted frm str
             }
         }
         string res="";
