@@ -8,16 +8,17 @@ public:
         }
         sort(begin(vec),end(vec));//sort based on capital
         int i=0;//to iter on vec
-        priority_queue<int> pq;//maxheap
+        priority_queue<int> pq;//maxheap to store max profits at top
         while(k--){//run till we hv done k projects
+            //add all projs that can be started with current capital
             while(i<n && vec[i].first<=w){//if cost of proj <starting capital
                 pq.push(vec[i].second);//we can take it-so add profit to pq
                 i++;//nxt idx
             }
-            if(pq.empty()){
+            if(pq.empty()){//if no projs r affordable now, break early
                 break;
             }
-            w+=pq.top();//max profit at top-maxheap
+            w+=pq.top();//add max profit (at top of maxheap) to w
             pq.pop();//remove it frm pq since we hv now done this proj
         }
         return w;//our max final capital after doing k projs
