@@ -9,13 +9,13 @@ public:
         for(int i=0;i<n;i++){
             int x=queries[i][0];
             int y=queries[i][1];
-            int dist=abs(x)+abs(y);
+            int dist=abs(x)+abs(y);//manhattan
             pq.push({dist,{x,y}});
             if(pq.size()>k){
                 pq.pop();
             }
             if(pq.size()==k){
-                ans[i]=pq.top().first;
+                ans[i]=pq.top().first;// kth closest so far
             }
         }
         return ans;
