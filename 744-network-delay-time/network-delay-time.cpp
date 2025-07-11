@@ -9,15 +9,16 @@ public:
             // adj[e[1]].push_back({e[0],e[2]});
         }
         const int INF=1e9;
-        vector<int> dist(n+1,INF);
+        vector<int> dist(n+1,INF);//dist to each node
         //minheap
         priority_queue<p,vector<p>,greater<>> pq;//{time,node}
-        dist[k]=0;
+        dist[k]=0;//src node has 0 delay
         pq.push({0,k});//initially time=0 & start frm node= k
         while(!pq.empty()){
             auto [time,node]=pq.top(); pq.pop();
-            if(time>dist[node]) continue;
+            if(time>dist[node]) continue;//skip if nto a better path
             for(auto &[v,w]:adj[node]){
+//if new time to reach neigh v (time + w) is smaller than the prev dist[v], update it
                 if(dist[v]>time+w){//store the min time
                     dist[v]=time+w;
                     pq.push({dist[v],v});
