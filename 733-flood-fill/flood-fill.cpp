@@ -4,7 +4,7 @@ class Solution {
         int m=image.size();
         int n=image[0].size();
         queue<pair<int,int>> q;
-        vector<vector<int>> vis(image.size(), vector<int>(image[0].size(), 0));
+        vector<vector<int>> vis(m, vector<int>(n, 0));
         q.push({sr,sc});
         vis[sr][sc]=1;
         image[sr][sc] = color;
