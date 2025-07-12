@@ -1,3 +1,4 @@
+// For a component with k vertices to be complete, every vertex must have exactly k - 1 edges connecting it to the other vertices within the component.
 class Solution {
 public:
     int countCompleteComponents(int n, vector<vector<int>>& edges) {
@@ -8,16 +9,14 @@ public:
         }
         int ans=0;
         vector<bool> vis(n,false);
-        for(int i=0;i<n;i++){
+        for(int i=0;i<n;i++){//go over all nodes
             if(!vis[i]){
                 vector<int> comp;//store all nodes in this component
                 bfs(i,adj,comp,vis);//bfs to fill this componen
-                bool iscomp=true;
+                bool iscomp=true;//is component complete?
                 for(auto neigh:comp){
                     //in a complete component w k nodes, each node has degree k - 1
-        //     in a complete graph:
-        //each node connects to every other node in the component.
-        //so in a k-node component, every node must have k-1 edges.
+        //in a complete graph: each node connects to every other node in the component. So, in a k-node component, every node must have k-1 edges.
                     if(adj[neigh].size()!=comp.size()-1){
                         iscomp=false;
                         break;
