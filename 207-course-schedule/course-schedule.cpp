@@ -2,15 +2,18 @@
 using namespace std;
 class Solution {
 public:
-    //kahns algo- bfs- for DAG only
+    //kahns algo- bfs- topo sort for DAG only
     bool toposort(unordered_map<int,vector<int>> &adj,int n,vector<int>&indegree){
         queue<int> q;
         int ctr=0;
         for(int i=0;i<n;i++){
-            if(indegree[i]==0) { q.push(i); ctr++;}
+            if(indegree[i]==0) { 
+                q.push(i);
+                ctr++;
+            }
         }
         while(!q.empty()){
-            int node = q.front();
+            int node=q.front();
             q.pop();
             for(int &v:adj[node]){
                 indegree[v]--;
@@ -20,21 +23,20 @@ public:
                 }
             }
         }
-        if(ctr == n){ //visited all nodes-no cylce
+        if(ctr==n){ //visited all nodes-no cylce
             return true;
         }
-        return false;  //cycle present in graph
-
+        return false;//cycle present in graph
     }
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         int n=numCourses;
         unordered_map<int,vector<int>> adj;
         vector<int> indegree(n,0); //kahns algo
-        for (auto &p : prerequisites){
+        for (auto &p:prerequisites){
             adj[p[1]].push_back(p[0]);
             indegree[p[0]]++;
         }
-        //if cycle present ,no possible orderings
+        //if cycle present, no possible orderings
         return toposort(adj,n,indegree);
     }
 };
