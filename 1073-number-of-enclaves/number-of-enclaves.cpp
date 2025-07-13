@@ -1,47 +1,49 @@
-//bfs
+//bfs-count number of land cells (1s) that are not connected to the boundary
 class Solution {
 public:
     int numEnclaves(vector<vector<int>>& grid) {
         int n = grid.size();
         int m = grid[0].size();
-        queue<pair<int, int>> q;
-        vector<vector<int>> vis(n, vector<int>(m, 0)); // Initializing a 2D vector with zeros
+        queue<pair<int, int>> q;//{x,y}
+        vector<vector<int>> vis(n, vector<int>(m, 0));
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                // First row, first col, last row, last col
-                if (i == 0 || j == 0 || i == n - 1 || j == m - 1) {
-                    if (grid[i][j] == 1) { // That boundary cell is a land cell
-                        q.push({i, j});
-                        vis[i][j] = 1;
+                //1st row, 1st col, last row, last col]            
+                // If it's a land cell and on the boundary, it cannot be enclosed
+                if(i==0||j==0||i==n-1||j==m-1){//boundary cells
+                    if(grid[i][j]==1){
+                        q.push({i,j});
+                        vis[i][j]=1;
                     }
                 }
             }
         }
-        int drow[] = {-1, 0, 1, 0};
-        int dcol[] = {0, 1, 0, -1};
-        while (!q.empty()) {
-            int row = q.front().first;
-            int col = q.front().second;
+        int drow[]={-1,0,1,0};
+        int dcol[]={0,-1,0,1};
+        while(!q.empty()){
+            int row=q.front().first;
+            int col=q.front().second;
             q.pop();
-            // Traverse all neighbors
-            for (int i = 0; i < 4; i++) {
-                int nrow = row + drow[i];
-                int ncol = col + dcol[i];
-                if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && vis[nrow][ncol] == 0 && grid[nrow][ncol] == 1) {
-                    q.push({nrow, ncol});
-                    vis[nrow][ncol] = 1;
+            for(int i=0;i<4;i++){
+                int nrow=row+drow[i];
+                int ncol=col+dcol[i];
+                if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && 
+                vis[nrow][ncol]==0 && grid[nrow][ncol]==1){
+                    q.push({nrow,ncol});
+                    vis[nrow][ncol]=1; 
                 }
             }
         }
-        int ctr = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (grid[i][j] == 1 && vis[i][j] == 0) {
+        int ctr=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+        // If it's a land cell and was never reached from boundary
+                if(grid[i][j]==1 && vis[i][j]==0){
                     ctr++;
                 }
             }
         }
-        return ctr;
+        return ctr;//no of enclaved land cells
     }
 };
 // //dfs
@@ -63,7 +65,7 @@ public:
 //     int numEnclaves(vector<vector<int>>& grid) {
 //         m=grid.size();
 //         n=grid[0].size();
-//         //apply dfs on first n last col
+//         //apply dfs on 1st n last col
 //         for(int row=0;row<m;row++){
 //             if(grid[row][0]==1){
 //                 dfs(grid,row,0);
@@ -72,7 +74,7 @@ public:
 //                 dfs(grid,row,n-1);
 //             }
 //         }
-//         //apply dfs on first n last row
+//         //apply dfs on 1st n last row
 //         for(int col=0;col<m;col++){
 //             if(grid[0][col]==1){
 //                 dfs(grid,0,col);
