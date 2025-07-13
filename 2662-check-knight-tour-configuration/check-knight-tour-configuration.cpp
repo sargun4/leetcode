@@ -17,16 +17,17 @@ public:
         };
         vector<vector<bool>> vis(n,vector<bool>(n,false));
         int x=0; int y=0;//start at(0,0)
-        for(int i=0;i<n*n;i++){//go over all grid cells
+        for(int i=0;i<n*n;i++){//go over all grid cells-each step of knights tour
             if(grid[x][y]!=i){
-                return false;
+                return false;//means that either there is a duplicate or missing no on the grid or that the order of visiting does not match with our expectation.
             }
             vis[x][y]=true;
             for(auto &d:dirns){
                 int nx=x+d[0];
                 int ny=y+d[1];
+                //in bounds, not yet vis and val= i+1
                 if(isValid(nx,ny,n,n) && !vis[nx][ny] && grid[nx][ny]==i+1){
-                    x=nx;
+                    x=nx;//update for next row n col
                     y=ny;
                 }
             }
@@ -34,7 +35,8 @@ public:
         return true;
     }
 }; 
-
+// Time : O(N*N)
+// Space : O(N*N)
 // class Solution {
 // public:
 // 	int minStepToReachTarget(vector<int>&KnightPos, vector<int>&TargetPos, int N){
