@@ -13,8 +13,8 @@ public:
         auto isSafe=[&](int x,int y){
             return (x>=0 && x<m && y>=0 && y<n);
         };
-        queue<pair<int,int>> q;
-        q.push({0,0});
+        queue<pair<int,int>> q;//{x,y}
+        q.push({0,0});//start at top left cell
         grid[0][0]=1;
         int lvl=0;
         while(!q.empty()){
@@ -24,10 +24,10 @@ public:
                 q.pop();
                 int x=curr.first;
                 int y=curr.second;
-                if(x==m-1 && y==n-1){
+                if(x==m-1 && y==n-1){//reached bottom right cell
                     return lvl+1;
                 }
-                for(auto dir: dirn){
+                for(auto dir: dirn){///8dirns
                     int nrow=x+dir[0];
                     int ncol=y+dir[1];
                     if(isSafe(nrow,ncol)&& grid[nrow][ncol]==0){
