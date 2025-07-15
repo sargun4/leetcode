@@ -1,9 +1,9 @@
 // class Solution {
 //  public:
 //   int minDistance(string word1, string word2) {
-//     const int m = word1.length();//first word length
-//     const int n = word2.length();//second word length
-//     // dp[i][j] := min # of operations to convert word1[0..i) to word2[0..j)
+//     int m = word1.length();//1st word length
+//     int n = word2.length();//second word length
+//     // dp[i][j] := min no of operations to convert word1[0..i) to word2[0..j)
 //     vector<vector<int>> dp(m + 1, vector<int>(n + 1));
 
 //     for (int i = 1; i <= m; ++i)
@@ -25,14 +25,17 @@
 class Solution {
 public:
     vector<vector<int>> dp;
-
     int solve(int idx1, int idx2, string word1, string word2) {
+    // If 1st string is empty, the only option is to
+    // insert all characters of 2nd string into 1st
         if(idx1 < 0)
             return idx2+1;
-        if(idx2 < 0)
+    // If 2nd string is empty, the only option is to
+    // insert all characters of 1st string into 2nd
+        if(idx2<0)
             return idx1+1;
 
-        if(dp[idx1][idx2] != -1)
+        if(dp[idx1][idx2]!=-1)
             return dp[idx1][idx2];
 
         if(word1[idx1] == word2[idx2])
