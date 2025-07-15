@@ -1,14 +1,14 @@
 class Solution {
 public:
     string smallestPalindrome(string s) {
-        map<char,int> map;//{char,freq}
+        map<char,int> freqmap;//{char,freq}
         for(auto &ch:s){
-            map[ch]++;
+            freqmap[ch]++;
         }
-        int oddctr=0;
+        int oddctr=0;//only 1 char can hv odd freq in str for it to be palindr
         char midChar='.';
         //get oddfreq char- thatll be our mid char if it exists
-        for(auto &[ch,freq]:map){
+        for(auto &[ch,freq]:freqmap){
             if(freq%2!=0){//odd
                 oddctr++;
                 midChar=ch;
@@ -18,7 +18,7 @@ public:
         if(oddctr>1) return "";
         // else, form half the string using half the freq of each char & add the middle char (if it exists)
         string half="";
-        for(auto &[ch,freq]:map){
+        for(auto &[ch,freq]:freqmap){
             half+=string(freq/2,ch);
         }
         //sort to get lexicographically smallest palindr
