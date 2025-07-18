@@ -24,7 +24,7 @@ public:
         q.push(root);
         while(!q.empty()){
             TreeNode* node=q.front(); q.pop();
-            if(isPerfect(node)){
+            if(isPerfect(node)){//if perfect subtree
                 int size=sizeSubtree(node);
                 sizes.push_back(size);
             }
@@ -34,7 +34,6 @@ public:
 
     }
     int kthLargestPerfectSubtree(TreeNode* root, int k) {
-        //
         vector<int> sizes;
         if(!root) return -1;
         bfs(root,sizes);
