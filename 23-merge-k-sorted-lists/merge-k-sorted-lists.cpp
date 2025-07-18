@@ -3,7 +3,7 @@ using namespace std;
 class Solution {
 public:
     ListNode* mergeTwoSortedLists(ListNode* l1,ListNode* l2){
-        if(l1==NULL) return l2;
+        if(l1==NULL) return l2; // If first list is empty, return second
         if(l2==NULL) return l1;
         if(l1->val<=l2->val){
             l1->next=mergeTwoSortedLists(l1->next,l2);
@@ -14,18 +14,20 @@ public:
         }
         return NULL;
     }
+    //Divide & merge lists bw index start n end
     ListNode* partitionNmerge(int start,int end,vector<ListNode*>&lists){
         if(start>end) return NULL;
         if(start==end) return lists[start];
         int mid=(start+end)/2;
-        ListNode*  l1=partitionNmerge(start,mid,lists);
-        ListNode*  l2=partitionNmerge(mid+1,end,lists);
+        //rec divide n merge both halves
+        ListNode* l1=partitionNmerge(start,mid,lists);
+        ListNode* l2=partitionNmerge(mid+1,end,lists);
         return mergeTwoSortedLists(l1,l2);
         
     }
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         int k=lists.size();
-        if(k==0) return NULL;
+        if(k==0) return NULL;///no lists
         return partitionNmerge(0,k-1,lists);
     }
 };
