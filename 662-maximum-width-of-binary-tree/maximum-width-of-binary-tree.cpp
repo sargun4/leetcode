@@ -12,7 +12,7 @@ class Solution {
 public:
     typedef unsigned long long ll;
     int widthOfBinaryTree(TreeNode* root) {
-        queue<pair<TreeNode*,ll>> q;
+        queue<pair<TreeNode*,ll>> q;//{node,child}
         q.push({root,0});
         ll maxwidth=0;
         while(!q.empty()){
