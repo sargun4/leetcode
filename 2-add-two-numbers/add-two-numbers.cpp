@@ -1,14 +1,14 @@
 class Solution {
 public:
     ListNode* rev(ListNode* head){
-        ListNode* curr=head,*prev=NULL,*temp;
+        ListNode* curr=head,*prev=NULL,*temp;//3ptrs
         while(curr!=NULL){
-            temp=curr->next;
+            temp=curr->next;  
             curr->next=prev;
             prev=curr;
             curr=temp;
         }
-        return prev;
+        return prev;//prev is new head of rev LL
     }
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         int sum=0;
