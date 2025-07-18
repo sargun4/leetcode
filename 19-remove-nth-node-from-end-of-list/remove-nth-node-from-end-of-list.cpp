@@ -3,12 +3,10 @@ public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
         ListNode* slow = head;
         ListNode* fast = head;
-
         while(n>0){
             fast = fast->next;
             n--;
         }
-        
         if(fast == NULL){
             return head->next;
         }
