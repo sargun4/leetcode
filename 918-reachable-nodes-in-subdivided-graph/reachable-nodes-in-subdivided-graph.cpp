@@ -1,4 +1,11 @@
-using p=pair<int,int>;
+// 1. The graph has both original nodes and new subdivided nodes on each edge.
+// 2. We treat the graph as a weighted graph where each edge weight = ctr + 1 (to represent the cost to cross that entire edge).
+// 3. We run Dijkstra's algorithm to find the shortest distance from 0 to all original nodes.
+// 4. While processing edges, we count:
+//    - Original nodes visited within maxMoves.
+//    - Partial subdivisions reachable from both sides:
+//      new_nodes_on_edge = min(w, used_from_u + used_from_v)
+using p=pair<int,int>;//{dist, node}
 class Solution {
 public:
     int reachableNodes(vector<vector<int>>& edges, int maxMoves, int n) {
@@ -13,8 +20,10 @@ public:
         for(int i=1;i<n;i++){
             dist[i]=maxMoves+1;
         }
+        //map to store how many subdivided nodes r used on edge {u, v}
         map<p,int> used;
         int ans=0;
+        //minheap for dijkstra
         priority_queue<p,vector<p>,greater<p>> pq;//{dist,node}
         pq.push({0,0});
         while(!pq.empty()){
@@ -24,7 +33,7 @@ public:
                 continue;
             }
 //each node only vis once-we hv reached a node in our og graph
-            ans++;
+            ans++;//og node
             for(auto pair:adj[node]){
                 //maxMoves-d = how further we can walk frm this node;
                 //wt=no of new nodes that r added on this edge 
@@ -40,6 +49,7 @@ public:
                 }
             }
         }
+        //count subdivided nodes
         //now each edge{u,v,wt} can be used w a max of w new nodes-
         // max of used[{u,v}]nodes frm 1 side n used[{v,u}] nodes frm other side
         for(auto e:edges){
