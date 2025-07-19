@@ -1,10 +1,7 @@
 class Solution {
 public:
     bool isvalid(int i,int j,int n,int m){
-        if(i>=0 && i<n && j>=0 && j<m){
-            return true;
-        }
-        return false;
+        return (i>=0 && i<n && j>=0 && j<m);
     }
     vector<vector<int>> dirns={{1,0},{-1,0},{0,1},{0,-1}};
     int minTimeToReach(vector<vector<int>>& moveTime) {
@@ -16,7 +13,7 @@ public:
         using T=tuple<int,int,int,int>;//{time,x,y,flag};
         priority_queue<T,vector<T>,greater<>> pq;//min heap
         int startTime=max(0,moveTime[0][0]);
-        pq.push({0,0,0,1});
+        pq.push({0,0,0,1});// start w flag=1 at (0,0) at t=0;
         dp[0][0][1]=startTime;
         while(!pq.empty()){
             auto [time,x,y,flag]=pq.top(); pq.pop();
@@ -31,15 +28,16 @@ public:
             if(x==n-1 && y==m-1){//reached bottom right cell
                 return time;
             }
-            int movecost=flag ? 1:2;
+            int movecost=flag ? 1:2;//movt cost
             for(auto &d:dirns){
                 int nr=x+d[0];
                 int nc=y+d[1];
                 if(isvalid(nr,nc,n,m)){
                     // nextTime=max(nextTime,moveTime[nr][nc])+1;
-                    int waitTime = max(time, moveTime[nr][nc]);  // wait first
-                    int nextTime = waitTime + movecost; 
+                    int waitTime = max(time, moveTime[nr][nc]);//wait first
+                    int nextTime = waitTime + movecost;
                     int nextStep=1-flag;
+                    
                     if(nextTime<dp[nr][nc][nextStep]){
                         dp[nr][nc][nextStep]=nextTime;
                         pq.push({nextTime,nr,nc,nextStep});
@@ -47,6 +45,6 @@ public:
                 }
             }
         }
-        return -1;
+        return -1;//unreachable
     }
 };
