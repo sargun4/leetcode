@@ -48,18 +48,20 @@ public:
         int n=grid[0].size();
         //minheap-{cost,row,col}
         priority_queue<vector<int>,vector<vector<int>>,greater<>> pq;
-        pq.push({0,0,0});
+        pq.push({0,0,0});//start at (0,0) w cost=0;
         //track min cost to reach each cell
         vector<vector<int>> mincost(m,vector<int>(n,INT_MAX));
         mincost[0][0]=0;
         //dijsktra
+        //T-O(m*n log(m*n))
+        //S-O(m*n)
         while(!pq.empty()){
-            auto curr=pq.top(); pq.pop();
+            auto curr=pq.top(); pq.pop();//log(size of pq)
             int cost=curr[0];
             int x=curr[1];
             int y=curr[2];
             //if weve found a better path to this cell,skip
-            if(mincost[x][y]!=cost) continue;
+            if(mincost[x][y]<cost) continue;
             //4dirns
             for(int dirn=0;dirn<4;dirn++){
                 int nx=x+dirns[dirn][0];
@@ -67,7 +69,8 @@ public:
                 //if in bounds
                 if(isValid(nx,ny,m,n)){
                     //add cost=1,incase we hv to change dirn of arrow
-                    int newcost=cost+(dirn!=(grid[x][y]-1) ? 1:0);
+                    int dirnCost=(dirn!=(grid[x][y]-1) ? 1:0);
+                    int newcost=cost+dirnCost;
                     //update if we got a better path
                     if(mincost[nx][ny]>newcost){
                         mincost[nx][ny]=newcost;
