@@ -1,19 +1,23 @@
-#include<bits/stdc++.h>
-using namespace std;
 class Solution {
 public:
     int findChampion(int n, vector<vector<int>>& edges) {
-        unordered_map<int,int> lostcount;
-        for(auto edge:edges){
-            lostcount[edge[1]]++;
+        //findnode with indegree[node]=0
+        vector<int> indeg(n,0);
+        for(auto e:edges){
+            int u=e[0]; int v=e[1];
+            indeg[v]++;
         }
-        int champCtr=0,champ=-1;
-        for(int team=0;team<n;team++){
-            if(lostcount[team]==0){
-                champCtr++;
-                champ=team;
+        int champ=-1;
+        int ctr=0;
+        for(int i=0;i<n;i++){
+            if(indeg[i]==0){
+                champ=i;
+                ctr++;
             }
         }
-        return (champCtr==1) ? champ : -1;
+        if(ctr>1){
+            return -1;
+        }
+        return champ;
     }
 };
