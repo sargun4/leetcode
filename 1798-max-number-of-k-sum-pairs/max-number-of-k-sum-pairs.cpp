@@ -16,3 +16,6 @@ public:
         return ctr;
     }
 };
+//if complement exists in the hashmap & ctr > 0:
+// if a valid pair, increment ctr & decrease the frequency of the complement
+// else, store or increment frequency of i in the hashmap
