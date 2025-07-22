@@ -1,6 +1,6 @@
 // We have the condition here that we can visit a node any number of times but we shall add its value only once for that path for the calculation of its quality.
 // A valid path in the graph is any path that starts at node 0, ends at node 0, and takes at most maxTime seconds to complete
-using p=pair<int,int>;//{neigh, time}
+using p=pair<int,int>;//{neigh,time}
 class Solution {
 public:
     int maximalPathQuality(vector<int>& values, vector<vector<int>>& edges, int maxTime) {
@@ -12,7 +12,7 @@ public:
             adj[u].push_back({v,wt});
             adj[v].push_back({u,wt});
         }
-        vector<int> vis(n,0);//
+        vector<int> vis(n,0);//vis[i]=no of times node i has been vis;
         dfs(adj,values,vis,res,0,0,0,maxTime);
         return res;
     }
@@ -28,14 +28,13 @@ public:
         }
         for(auto&it:adj[node]){
             int neigh=it.first;
-            int newtime=time+it.second;
+            int newtime=time+it.second;//time to get to neigh
             int newscore=score;
             if(vis[neigh]==0){//if 1s time visitng this neigh, add its val
                 newscore+=values[neigh];
             }
             dfs(adj,values,vis,res,neigh,score,newtime,maxtime);
-        }       
-        
+        }
         vis[node]--;//backtrack
     }
 };
