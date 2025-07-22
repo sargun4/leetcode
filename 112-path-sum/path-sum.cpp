@@ -2,30 +2,25 @@
 class Solution {
 public:
     bool hasPathSum(TreeNode* root, int target) {
-        //if root is NULL you can't get any value even zero
-        if(root==NULL)
+        if(root==NULL)//can't get any value even zero
             return false;
-        //for BFS to store nodes and keep track of target
+        //BFS to store nodes, track of target
         queue<pair<TreeNode*,int>>q; //{node,sum}
-        
         //pushed given root and target we need
         q.push({root,target});
-        
-        //BFS
         while(!q.empty()){
-
-            TreeNode *root=q.front().first;
-            target=q.front().second;
+            auto curr=q.front();
+            TreeNode *root=curr.first;
+            target=curr.second;
             q.pop();
-            
             //if there is no left and right child node must be a leaf node
-            //and we'll subtract val of that node and check it is zero or not 
+            //and we'll subtract val of that node and check if it's 0 or not 
             // since root-to-leaf paths are needed.
             if(root->right==NULL && root->left==NULL){//leaf
                 if(target-(root->val)==0)
                     return true;//got a path
             }
-            //if child present push to queue else ignore
+            //if child present push rem values to queue, else ignore
             if(root->left) q.push({root->left,target-(root->val)});
             if(root->right) q.push({root->right,target-(root->val)});
         }
