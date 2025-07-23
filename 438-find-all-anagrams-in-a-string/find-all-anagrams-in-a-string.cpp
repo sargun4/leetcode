@@ -1,3 +1,5 @@
+// T-O(n*26)
+// S-O(26)
 class Solution {
 public:
     //to check if all char counts are 0 (anagram condition)
@@ -24,7 +26,7 @@ public:
         //sliding window over s
         while(j<n){
             ctr[s[j]-'a']--;//decrease the count of the curr char at j in s;
-            if(j-i+1 == k){//if size of substr=len(p), check if all chars of p are present in thsi substr - if all the ctr in count of it are zero-it is anagram
+            if(j-i+1 == k){//if window size=len(p), check if all chars of p are present in this substr - if all the ctr in count of it are zero-it is anagram
                 if(allZero(ctr)){
                     ans.push_back(i);
                 }
