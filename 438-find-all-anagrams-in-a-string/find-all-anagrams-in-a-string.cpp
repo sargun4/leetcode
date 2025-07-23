@@ -2,7 +2,7 @@
 // S-O(26)
 class Solution {
 public:
-    //to check if all char counts are 0 (anagram condition)
+    //to check if all char counts are 0 (anagram condn)
     bool allZero(vector<int>&ctr){
         for(int &i:ctr){
             if(i!=0){//if any 1 elmnt found thats not 0,return false
