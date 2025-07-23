@@ -25,11 +25,13 @@ public:
         int j=0;//right ptr
         //sliding window over s
         while(j<n){
+            //include curr char s[j] in the window
             ctr[s[j]-'a']--;//decrease the count of the curr char at j in s;
             if(j-i+1 == k){//if window size=len(p), check if all chars of p are present in this substr - if all the ctr in count of it are zero-it is anagram
                 if(allZero(ctr)){
-                    ans.push_back(i);
+                    ans.push_back(i);//store start idx i
                 }
+                //remove s[i] frm the window
                 ctr[s[i]-'a']++;//reset it back to og once that char is not in our window
                 i++;
             }
