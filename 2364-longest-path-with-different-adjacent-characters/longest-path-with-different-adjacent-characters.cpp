@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // Helper to update the top two maximum path lengths for a node
+    //helper to update the top two maximum path lengths for a node
     void updateTopTwo(vector<int>& longest, vector<int>& secondLongest, int node, int length) {
         if (length >= longest[node]) {
             secondLongest[node] = longest[node];
@@ -13,37 +13,38 @@ public:
         int n = parent.size();
         vector<int> longest(n, 1);//longest downward path frm node
         vector<int> secondLongest(n, 1); //2nd longest downward path frm node
-        vector<int> degree(n, 0);//no of children of each node
-        // Step 1: Calculate child count (degree)
+        vector<int> indegree(n, 0);//no of children of each node
+        //1. calc child count (indegree)
         for (int i = 1; i < n; i++) {
-            degree[parent[i]]++;
+            indegree[parent[i]]++;
         }
-        // Step 2: Push all leaf nodes into queue
+        //2. push all leaf nodes into q
         queue<int> q;
         for (int i = 1; i < n; i++) {
-            if (degree[i] == 0) {
+            if (indegree[i] == 0) {
                 q.push(i);
             }
         }
-        int maxPath = 1;  // Answer starts with at least 1 (single node)
-        // Step 3: Process nodes frm leaves towards the root
+        int maxPath = 1;//ans starts with at least 1 (single node)
+        //3. Process nodes frm leaves towards the root
         while (!q.empty()) {
             int node = q.front();
             q.pop();
-            int p = parent[node];  // Parent of current node
-            if (p == -1) continue; // Skip root's parent (invalid)
+            int p = parent[node];  //parent of curr node
+            if (p == -1) continue; //skip root's parent (invalid)
 
-            // If the characters differ, extend the path length
-            int pathLength = 1;
+            int pathlen = 1;
+            //if the chars differ, extend path len
             if (s[node] != s[p]) {
-                pathLength += longest[node];
+                pathlen += longest[node];
             }
-            // Update parent's top two longest paths
-            updateTopTwo(longest, secondLongest, p, pathLength);
-            // Update maxPath with parent's two longest child paths
+            //update parent's top two longest paths
+            updateTopTwo(longest, secondLongest, p, pathlen);
+            //update maxPath with parent's two longest child paths
             maxPath = max(maxPath, longest[p] + secondLongest[p] - 1);
-            // Reduce degree of parent and add it to queue if all children are processed
-            if (--degree[p] == 0) {
+            //reduce indegree of parent and add it to q if all children are processed
+            indegree[p]--;
+            if (indegree[p]==0) {
                 q.push(p);
             }
         }
@@ -65,7 +66,7 @@ public:
 //             if(s[child]==s[node]){//adjacent nodes cant hv same chars of alphabet
 //                 continue;
 //             }
-//             // Update top 2 longest paths
+//             //update top 2 longest paths
 //             if(child_longest_len>longest){
 //                 secondLongest=longest;
 //                 longest=child_longest_len;
