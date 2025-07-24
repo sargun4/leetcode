@@ -43,6 +43,7 @@ public:
         dfs(0,-1,subtreeXor,inTime,outTime,time,nums,adj);
         int res=INT_MAX;
         //go for all possible pair of nodes n explore them
+        // Try all pairs (u, v) where u, v are nodes != root (0)
         for(int u=1;u<n;u++){
             for(int v=u+1;v<n;v++){
                 int xor1; int xor2; int xor3;
