@@ -13,18 +13,17 @@ public:
         //minheap
         priority_queue<p,vector<p>,greater<>> pq;//{time,node}
         vector<long long> shortestTime(n,LLONG_MAX);//dist arr
-        //no of ways to reach each node in shortest time
+        // store no of ways to reach each node in shortest time
         vector<long long> pathCount(n,0);
         shortestTime[0]=0;
         pathCount[0]=1;//1 way to reach node 0
         pq.push({0,0});//
         while(!pq.empty()){
             auto [currtime,currnode]=pq.top(); pq.pop();
-            // Skip outdated distances
+            //skip outdated distances
             if (currtime>shortestTime[currnode]) continue;
-
-//if traveling through curr node provides a shorter path(shortestTime[u]+wt) to a neighboring node than stored(shortestTime[v])
             for(auto &[neigh,roadtime]:adj[currnode]){
+//if traveling through curr node provides a shorter path(shortestTime[u]+wt) to a neighboring node than stored(shortestTime[v])
                 //found a new shortest path, so update it and reset path count
                 if(shortestTime[neigh]>currtime+roadtime){
                     shortestTime[neigh]=currtime+roadtime;
