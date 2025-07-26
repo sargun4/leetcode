@@ -42,8 +42,8 @@ public:
 //         int n=s.length();
 //         memset(dp,-1,sizeof(dp));
 //         // dp[i][j]=-1 not yet found
-//         // dp[i][j]=0 false
-//         // dp[i][j]=1 true
+//         // dp[i][j]=0 false-not palindr bw i n j idx
+//         // dp[i][j]=1 true-palindr bw i n j idx
 //         int ctr=0;
 //         for(int i=0; i < n;i++){
 //             for(int j=i;j<n;j++){
