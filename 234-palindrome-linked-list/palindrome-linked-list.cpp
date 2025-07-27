@@ -3,7 +3,7 @@ public:
     bool isPalindrome(ListNode* head) {
         if(head==NULL||head->next==NULL) return true;
         ListNode*slow=head,*fast=head;
-        while(fast->next!=NULL && fast->next->next!=NULL){
+        while(fast->next!=NULL && fast->next->next!=NULL){//get to mid of ll, for even sized ll, mid is left node
             slow=slow->next;
             fast=fast->next->next;
         }        
