@@ -3,7 +3,7 @@ public:
     ListNode* reverseBetween(ListNode* head, int left, int right) {
         ListNode* lprev = nullptr;
         ListNode* curr = head; 
-        // Move to the node just before the reversal starts
+        //move to the node just before the reversal starts
         for (int i = 1; i < left; i++) {
             lprev = curr;
             curr = curr->next;
@@ -14,7 +14,7 @@ public:
         for (int i = 1; i <= right; i++) {
             r = r->next;
         } 
-        // Reverse the nodes in the range [left, right]
+        //rev the nodes in the range [left, right]
         ListNode* temp;
         ListNode* prev = nullptr;
         for (int i = left; i <= right; i++) {
@@ -24,12 +24,12 @@ public:
             curr = temp;
         } 
         // Connect the reversed part back to the original list
-        if (lprev) {
+        if(lprev){
             lprev->next = prev;
-        } else {
+        }else{
             head = prev;
         }
-        l->next = curr; 
+        l->next = curr;
         return head;
     }
 };
