@@ -10,7 +10,6 @@ public:
         while(even!=NULL && even->next!=NULL){
             odd->next=even->next;
             even->next=even->next->next;
-
             odd=odd->next;
             even=even->next;
         }
