@@ -1,42 +1,3 @@
-// class Solution {
-// public:
-//     int size(ListNode* curr){
-//         int len=0;
-//         while(curr!=NULL){
-//             curr=curr->next;
-//             len++;
-//         }
-//         return len;
-//     }
-//     ListNode* rotateRight(ListNode* head, int k) {
-//         if(head==NULL){
-//             return NULL;
-//         }
-//         int n = size(head);
-//         int len=k%n;
-//         len=n-len;
-//         if(n==1||len==n){
-//             return head;
-//         }
-//         int j=0;
-//         ListNode *prev=head,*firstaddr=head;
-//         while(prev!=NULL){
-//             j++;
-//             if(j==len){
-//                 firstaddr=prev->next;
-//                 prev->next=NULL;
-//                 break;
-//             }
-//             prev=prev->next;
-//         }
-//         prev=firstaddr;
-//         while(prev->next!=NULL){
-//             prev=prev->next;
-//         }
-//         prev->next=head;
-//         return firstaddr;
-//     }
-// };
 class Solution {
     public:
         ListNode* rotateRight(ListNode* head, int k) {
@@ -48,7 +9,7 @@ class Solution {
             curr=curr->next;
         }
         ///go till that node
-        curr->next=head; //make last node(curr) point to head-make circular
+        curr->next=head; //make last node(curr) point to head- make the LL circular first
         k=k%len;
         k=len-k;
         while(k--){
