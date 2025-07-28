@@ -1,0 +1,21 @@
+
+class Solution {
+public:
+    void fixBST(Node* root,Node*&prev,Node*&first,Node*&second){
+        if(root==NULL) return;
+        fixBST(root->left,prev,first,second);
+        if(prev!=NULL && root->data < prev->data){
+            if(first==NULL){
+                first=prev;
+            }
+            second=root;
+        }
+        prev=root;
+        fixBST(root->right,prev,first,second);
+    }
+    void correctBST(Node* root){
+        Node* prev=NULL; Node* first=NULL; Node* second=NULL;
+        fixBST(root,prev,first,second);
+        swap(first->data,second->data);
+    }
+};
