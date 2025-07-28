@@ -1,111 +1,25 @@
-//{ Driver Code Starts
-#include <bits/stdc++.h>
-using namespace std;
-#define MAX_HEIGHT 100000
-
-// Tree Node
-struct Node
-{
-    int data;
-    Node* left;
-    Node* right;
-};
-
-// Utility function to create a new Tree Node
-Node* newNode(int val)
-{
-    Node* temp = new Node;
-    temp->data = val;
-    temp->left = NULL;
-    temp->right = NULL;
-
-    return temp;
-}
-
-
-vector <int> bottomView(Node *root);
-
-// Function to Build Tree
-Node* buildTree(string str)
-{
-    // Corner Case
-    if(str.length() == 0 || str[0] == 'N')
-        return NULL;
-
-    // Creating vector of strings from input
-    // string after spliting by space
-    vector<string> ip;
-
-    istringstream iss(str);
-    for(string str; iss >> str; )
-        ip.push_back(str);
-
-    // Create the root of the tree
-    Node* root = newNode(stoi(ip[0]));
-
-    // Push the root to the queue
-    queue<Node*> queue;
-    queue.push(root);
-
-    // Starting from the second element
-    int i = 1;
-    while(!queue.empty() && i < ip.size()) {
-
-        // Get and remove the front of the queue
-        Node* currNode = queue.front();
-        queue.pop();
-
-        // Get the current node's value from the string
-        string currVal = ip[i];
-
-        // If the left child is not null
-        if(currVal != "N") {
-
-            // Create the left child for the current node
-            currNode->left = newNode(stoi(currVal));
-
-            // Push it to the queue
-            queue.push(currNode->left);
-        }
-
-        // For the right child
-        i++;
-        if(i >= ip.size())
-            break;
-        currVal = ip[i];
-
-        // If the right child is not null
-        if(currVal != "N") {
-
-            // Create the right child for the current node
-            currNode->right = newNode(stoi(currVal));
-
-            // Push it to the queue
-            queue.push(currNode->right);
-        }
-        i++;
-    }
-
-    return root;
-}
-
-
-// } Driver Code Ends
-//Function to return a list containing the bottom view of the given tree.
-
+// Start BFS with the root node and HD = 0
+// For each node dequeued:
+// Overwrite the value in the map for its HD (m[HD] = node->data) because the latest node at that HD will be bottom-most due to BFS
+// Push the left and right children into the queue with HD - 1 and HD + 1 respectively
+// After traversal, extract values from the map in order (sorted by HD) to get the bottom view
+// Time: O(N log N) — due to insertion in map for N nodes
+// Space: O(N) — for queue and map storage
 class Solution {
   public:
     vector<int> bottomView(Node *root) {
         vector<int> ans;
         if(root==NULL) return ans;
-        map<int,int> m;
-        queue<pair<Node*,int>>q;
+        map<int,int> m;//{horiz_dist:node_data}, horiz_dist=vertline
+        queue<pair<Node*,int>>q;//{node:vertline it is at}
         q.push({root,0});
         while(!q.empty()){
             auto it=q.front();
             q.pop();
             Node* node=it.first;
             int vertline=it.second;
+            //for bottom view, always update the map with the curr node's val
+            //it overwrites prev vals at this vertical level from higher lvls
             m[vertline]=node->data;
             if(node->left!=NULL){
                 q.push({node->left,vertline-1});
@@ -113,6 +27,8 @@ class Solution {
                 q.push({node->right,vertline+1});
             }
         }
+        //map now contains the bottom-most node at each vertical distance
+        //traverse map from leftmost to rightmost and add to answer
         for(auto it:m){
             ans.push_back(it.second);
         }
@@ -120,27 +36,3 @@ class Solution {
     }
 };
 
-
-//{ Driver Code Starts.
-
-int main() {
-    int t;
-    string tc;
-    getline(cin, tc);
-    t=stoi(tc);
-    while(t--)
-    {
-        string s ,ch;
-        getline(cin, s);
-        Node* root = buildTree(s);
-        Solution ob;
-        vector <int> res = ob.bottomView(root);
-        for (int i : res) cout << i << " ";
-        cout << endl;
-    }
-    return 0;
-}
-
-
-
-// } Driver Code Ends
