@@ -6,11 +6,12 @@ public:
     bool find(vector<vector<char>>&board,int i,int j,int idx,string &word){
         int m=board.size();
         int n=board[0].size();
-
+        // If we're at the last character, return true if it matches
         if(idx == word.length()) return true; //word found
         if( (i<0||j<0||i>=m||j>=n) || board[i][j]=='$'){
             return false;
         }
+        //if curr char doesnt match - false
         if(board[i][j]!=word[idx]){
             return false;
         }
@@ -23,7 +24,7 @@ public:
                 return true;
             }
         }
-        board[i][j]=temp;//backtrack
+        board[i][j]=temp;//backtrack n unmark cell
         return false;
     }
     bool exist(vector<vector<char>>& board, string word) {
@@ -31,6 +32,7 @@ public:
         int n=board[0].size();
         for (int i = 0;i<m;i++){
             for (int j = 0;j<n;j++){
+                //start dfs frm the first character of word
                 if(board[i][j]==word[0] && find(board,i,j,0,word)){
                     return true;
                 }
