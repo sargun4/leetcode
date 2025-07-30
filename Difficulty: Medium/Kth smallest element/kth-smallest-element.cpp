@@ -1,5 +1,5 @@
 class Solution {
-  public:
+public:
     int kthSmallest(vector<int>& arr, int k) {
         int n=arr.size();
         priority_queue<int> pq;//maxheap
