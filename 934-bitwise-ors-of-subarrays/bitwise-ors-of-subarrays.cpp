@@ -13,8 +13,7 @@ public:
             curr.insert(arr[i]);
             res.insert(arr[i]);
             prev=curr;
-            curr.clear(
-            );
+            curr.clear();
         }
         return res.size();
     }
