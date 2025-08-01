@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std; 
 // //1memo
@@ -66,16 +65,16 @@ class Solution {
 public:
     bool checkValidString(string s) {
         int n=s.length();
-        stack<int> openbrkt_st;
+        stack<int> openbrac_st;
         stack<int> asterisk_st;
         for(int i=0;i<n;i++){
             if(s[i]=='('){
-                openbrkt_st.push(i);
+                openbrac_st.push(i);
             }else if(s[i]=='*'){
                 asterisk_st.push(i);
             }else{//closed brkt
-                if(!openbrkt_st.empty()){
-                    openbrkt_st.pop();
+                if(!openbrac_st.empty()){
+                    openbrac_st.pop();
                 }else if(!asterisk_st.empty()){
                     asterisk_st.pop();
                 }else{
@@ -83,13 +82,13 @@ public:
                 }
             }
         }
-        while(!openbrkt_st.empty() && !asterisk_st.empty()){
-            if(openbrkt_st.top()>asterisk_st.top()){
+        while(!openbrac_st.empty() && !asterisk_st.empty()){
+            if(openbrac_st.top()>asterisk_st.top()){
                 return false;
             }
-            openbrkt_st.pop();
+            openbrac_st.pop();
             asterisk_st.pop();
         }
-        return openbrkt_st.empty();
+        return openbrac_st.empty();
     }
 };
