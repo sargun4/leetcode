@@ -31,6 +31,7 @@ public:
                 j--;//move down
             }
         }
+        //if any rem chars
         while(i>0){
             ans+=str1[i-1];
             i--;
