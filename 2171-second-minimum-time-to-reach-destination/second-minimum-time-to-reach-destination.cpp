@@ -20,12 +20,12 @@ public:
             auto [timepassed,node]=pq.top();
             pq.pop();
 
-            if(node==n && d2[n]!=INT_MAX){
+            if(node==n && d2[n]!=INT_MAX){//reached dest and it's 2nd min time found
                 return d2[n];//once 2nd min time to destination is found
-            }
+            } 
             int div=timepassed/change;
             if(div%2==1){//odd-red light-wait
-                timepassed=(div+1)*change;
+                timepassed=(div+1)*change;//get next green light interval time
             }
             for(auto &neigh:adj[node]){//trav all reachable nodes frm node
                 if(d1[neigh]>timepassed+time){//if curr path is lesser than prev recorded one
