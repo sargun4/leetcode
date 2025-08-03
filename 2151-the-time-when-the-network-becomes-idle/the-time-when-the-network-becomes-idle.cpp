@@ -38,12 +38,13 @@ public:
         //get slowest completion time
         int slowest=0;
         for(int i=1;i<n;i++){
-            int firstTimeRcvd=dist[i]*2;
-            int waitTime=firstTimeRcvd-1;
+            int firstTimeRcvd=dist[i]*2;//round trip time
+            int waitTime=firstTimeRcvd-1;//time beforr response rcvd by server i
             int numMsgsResent=waitTime/patience[i];
-            int time=firstTimeRcvd+numMsgsResent*patience[i];
-            slowest=max(slowest,time);
+            int lastMsgTime = numMsgsResent * patience[i];//time when last msg sent
+            int completionTime = firstTimeRcvd + lastMsgTime;//final response time
+            slowest = max(slowest, completionTime);
         }
-        return slowest+1;
+        return slowest+1;//network becomes idle 1sec after last repsonse
     }
 };
