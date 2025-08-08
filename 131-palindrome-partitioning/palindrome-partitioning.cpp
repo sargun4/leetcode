@@ -12,18 +12,18 @@ public:
             ans.push_back(path);
             return;
         }
-        for(int end=idx;end<s.size();end++){
-            if(ispalind(s,idx,end)){
-                path.push_back(s.substr(idx,end-idx+1));
-                dfs(end+1,s,path,ans);
+        for(int j=idx;j<s.size();j++){
+            if(ispalind(s,idx,j)){
+                path.push_back(s.substr(idx,j-idx+1));
+                dfs(j+1,s,path,ans);
                 path.pop_back();
             }
         }
     }
 
-    bool ispalind(string &s,int start,int end){
-        while(start<=end){
-            if(s[start++]!=s[end--]){
+    bool ispalind(string &s,int i,int j){
+        while(i<=j){
+            if(s[i++]!=s[j--]){
                 return false;
             }
         }
