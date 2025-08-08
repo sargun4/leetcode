@@ -18,7 +18,7 @@ class Solution {
         }
         return findNode(root->right, target);
     }
-    void markParents(Node* root, unordered_map<Node*,Node*> &parent_track,int target){
+    void markParents(Node* root, unordered_map<Node*,Node*>&parent_track){
         queue<Node*>q;
         q.push(root);
         while(!q.empty()){
@@ -33,12 +33,11 @@ class Solution {
             }
         }
     }
-
 public:
     vector<int> KDistanceNodes(Node* root, int target, int k) {
         // return the sorted vector of all nodes at k dist
         unordered_map<Node*,Node*> parent_track; //stores {node:parent}
-        markParents(root,parent_track,target);
+        markParents(root,parent_track);
         unordered_map<Node*,bool> vis;
         queue<Node*>q;
 
@@ -49,7 +48,7 @@ public:
         q.push(targetNode);
         vis[targetNode] = true;
         int currlvl = 0;
-        while(!q.empty()){ //bfs to go upto k lvl frm target node and using our map
+        while(!q.empty()){//bfs to go upto k lvl frm target node and using our map
             int size=q.size();
             if(currlvl++ == k) break; //reched kth lvl
             for(int i=0;i<size;i++){
