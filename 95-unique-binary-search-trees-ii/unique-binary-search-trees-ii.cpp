@@ -1,6 +1,6 @@
 //To find all the possible permutations of BSTs with n nodes, we can lock one node as the root node & split n - 1 nodes between the left and right subtrees in all the possible ways.
 // we place a node with value i as the root node and place i - 1 nodes having values from 1 to i - 1 in the left subtree. (If i == 1, the left child is null). Similarly, we place the remaining n - i nodes having values from i + 1 to n in the right subtree. (If i == n, the right child is null).
-// recursion as we are breaking down a problem with n nodes to smaller, repetitive subproblems with i - 1 and n - i nodes (for i = 1 till n) to compute the answer for n nodes.
+// recursion as we are breaking down a problem with n nodes to smaller, repetitive subproblems with i - 1 and n - i nodes (for i = 1 till n) to compute the ans for n nodes.
 //so build the tree recursively for left and right subtrees rooted at i as leftSubTree = bst(start, i-1) and rightSubtree = bst(i + 1, end)
 //Now connect leftSubTree & rightSubTree with root & add this tree(rooted at i) to the ans list
 class Solution {
