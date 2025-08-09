@@ -4,7 +4,7 @@ public:
     // check for symmetric tree
     bool isSymmetric(TreeNode* root){
         // Base case: null node is symmetric
-        if(root ==NULL)
+        if(root==NULL)
             return true;
         // Recursive call: compare left subtree and right subtree
         return isSymmetricUtil(root->left, root->right);
