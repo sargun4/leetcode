@@ -1,11 +1,11 @@
 class Solution {
 private:
-    void markTree(TreeNode* root, TreeNode*& prev, TreeNode*& first, TreeNode*& end) {
+    void markTree(TreeNode* root, TreeNode*& prev, TreeNode*& first, TreeNode*& end){
         if (!root) return;
         markTree(root->left, prev, first, end);
         if (prev) {
             if (root->val < prev->val) {
-                if (!first) {
+                if(!first) {
                     first = prev;
                 }
                 end = root;
@@ -16,7 +16,7 @@ private:
     }
 public:
     void recoverTree(TreeNode* root) {
-        TreeNode *prev = nullptr, *first = nullptr, *end = nullptr;
+        TreeNode *prev = NULL, *first = NULL, *end = NULL;
         markTree(root, prev, first, end);
         swap(first->val, end->val);
         return;
