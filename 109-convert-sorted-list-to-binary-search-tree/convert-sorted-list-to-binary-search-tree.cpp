@@ -6,7 +6,7 @@ public:
         ListNode* slow=head;
         ListNode* fast=head;
         ListNode* slow_prev=NULL;
-
+        //get to mid of LL to make it root of bst
         while(fast!=NULL && fast->next!=NULL){
             slow_prev=slow;
             slow=slow->next;
