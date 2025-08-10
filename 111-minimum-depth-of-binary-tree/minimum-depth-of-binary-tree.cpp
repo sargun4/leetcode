@@ -34,7 +34,6 @@ public:
         }
         int l=root->left !=NULL ? minDepth(root->left):INT_MAX;
         int r=root->right !=NULL ? minDepth(root->right):INT_MAX;
-
         return 1+min(l,r);
     }
 };
