@@ -1,31 +1,23 @@
-
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-
-//bfs
+//bfs-O(N × h) in worst case
+// since N nodes visited once
+// String concatenation takes up to O(h) where h is tree height
 class Solution {
 public:
     string smallestFromLeaf(TreeNode* root) {
-        queue<pair<TreeNode*,string>>q;
-        q.push({root,string(1,char(root->val+'a'))});
-        string res="";
+        queue<pair<TreeNode*,string>>q;//(node, stringFrmThisNodeToLeaf)
+//convert root->val (0–25) to corresponding char ('a' + val)
+        string ch=string(1,char(root->val+'a'));
+        q.push({root,ch});
+        string ans="";//lexciogrphiclly smallest path
         while(!q.empty()){
             auto[node,curr]=q.front();
             q.pop();
-            if(!node->left && !node->right){
-                if(res=="" ||res>curr){
-                    res=curr;
+            if(!node->left && !node->right){//leaf
+                if(ans=="" ||ans>curr){//update ans
+                    ans=curr;
                 }
             }
+//need the string from leaf to root, so prepend the curr node's char to the running string
             if(node->left){
                 q.push({node->left,char(node->left->val+'a')+curr});
             }
@@ -33,19 +25,19 @@ public:
                 q.push({node->right,char(node->right->val+'a')+curr});
             }
         }
-        return res;
+        return ans;
     }
 };
 // //dfs
 // class Solution {
 // public:
-//     string res="";
+//     string ans="";
 //     void dfs(TreeNode *root,string curr){
 //         if(!root) return;
 //         curr=char(root->val+'a')+curr;
 //         if(!root->left && !root->right){
-//             if(res==""||res>curr){
-//                 res=curr;
+//             if(ans==""||ans>curr){
+//                 ans=curr;
 //             }
 //             return;
 //         }
@@ -54,6 +46,6 @@ public:
 //     }
 //     string smallestFromLeaf(TreeNode* root) {
 //         dfs(root,"");
-//         return res;
+//         return ans;
 //     }
 // };
