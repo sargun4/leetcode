@@ -2,12 +2,6 @@
 // Space Complexity: O(M): M is the maximum no in the tree at any lvl
 class Solution {
 public:
-    // The idea is to use BFS, which is a common way to traverse the tree lvl by lvl
-    // For a standard BFS, we can use queue to push the first root node into a queue
-    // Then remove the front of the queue, add its children to back of the queue
-    // Do the above steps until the queue is empty
-    // We can simply use `lvl` to store the values of the nodes at current lvl, 
-    // and add it back to `ans` once we've processed all nodes at that lvl
     vector<vector<int>> levelOrder(Node* root) {
         // the total no of nodes is between [0, 10 ^ 4]
         // check if root is nullptr to cover 0 node case
