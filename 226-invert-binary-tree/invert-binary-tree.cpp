@@ -1,22 +1,34 @@
-// class Solution:
-//     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-//         if not root: #Base Case
-//             return root
-//         self.invertTree(root.left) #Call the left substree
-//         self.invertTree(root.right)  #Call the right substree
-//         # Swap the nodes
-//         root.left, root.right = root.right, root.left
-//         return root # Return the root
-
+//bfs
 class Solution {
 public:
     TreeNode* invertTree(TreeNode* root) {
         if(!root){
             return root;
         }
-        invertTree(root->left);
-        invertTree(root->right);
-        swap(root->left,root->right);
+        queue<TreeNode*>q;
+        q.push(root);
+        while(!q.empty()){
+            TreeNode* node=q.front();
+            q.pop();
+            TreeNode* temp=node->left;
+            node->left=node->right;
+            node->right=temp;
+            if(node->left) q.push(node->left);
+            if(node->right) q.push(node->right);
+        }
         return root;
     }
 };
+// //dfs
+// class Solution {
+// public:
+//     TreeNode* invertTree(TreeNode* root) {
+//         if(!root){
+//             return root;
+//         }
+//         invertTree(root->left);
+//         invertTree(root->right);
+//         swap(root->left,root->right);
+//         return root;
+//     }
+// };
