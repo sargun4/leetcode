@@ -1,7 +1,7 @@
 class Solution {
 public:
     string tree2str(TreeNode* root) {
-         if(root==NULL){
+        if(root==NULL){
             return "";
         }
         string res=to_string(root->val);
