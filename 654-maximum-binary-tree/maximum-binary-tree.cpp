@@ -17,6 +17,7 @@ public:
         return root;
     }
     TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
-        return makeTree(nums,0,nums.size()-1);
+        int n=nums.size();
+        return makeTree(nums,0,n-1);
     }
 };
