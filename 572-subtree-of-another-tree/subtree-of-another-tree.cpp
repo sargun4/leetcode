@@ -2,10 +2,11 @@
 // #O(tree*subtree)
 class Solution{
 public:
+    //check if 2 BTs r identical
     bool sametree(TreeNode* root, TreeNode* subRoot){
-        if(!root && !subRoot) return true;
-        if(!root || !subRoot) return false;
-        if(root->val!=subRoot->val) return false;
+        if(!root && !subRoot) return true;//both null-same
+        if(!root || !subRoot) return false;//1null other not-not same
+        if(root->val!=subRoot->val) return false;//val mismatch
         return sametree(root->left,subRoot->left) && sametree(root->right,subRoot->right);
     }
     bool isSubtree(TreeNode* root, TreeNode* subRoot) {
@@ -23,7 +24,7 @@ public:
             // check if subtree starting frm curr node is identical to given subtree
             if(curr->val==subRoot->val){
                 if(sametree(curr,subRoot)){
-                    return true;
+                    return true;//found mathcing subtree
                 }
             }
         } 
