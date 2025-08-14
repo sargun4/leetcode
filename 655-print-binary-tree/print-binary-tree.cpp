@@ -31,6 +31,7 @@ public:
                     string rootLeft=to_string(node->left->val);
                     int row_lchild=row+1;
                     int col_lchild=col-pow(2,lvls-row-1);
+                    //lchild at- ans[r+1][c-2^(height-r-1)]
                     ans[row_lchild][col_lchild]=rootLeft;
                     map[node->left]={row_lchild,col_lchild};
                 }
@@ -40,6 +41,7 @@ public:
                     string rootRight=to_string(node->right->val);
                     int row_rchild=row+1;
                     int col_rchild=col+pow(2,lvls-row-1);
+                    //rchild at- ans[r+1][c+2^(height-r-1)]
                     ans[row_rchild][col_rchild]=rootRight;
                     map[node->right]={row_rchild,col_rchild};
                 }
