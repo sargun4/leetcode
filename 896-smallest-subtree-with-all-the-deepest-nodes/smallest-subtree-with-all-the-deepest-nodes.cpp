@@ -12,7 +12,7 @@ TreeNode* lca(TreeNode* root, TreeNode* p, TreeNode* q) {
         //recur for the left and right subtrees
         TreeNode* left = lca(root->left, p, q);
         TreeNode* right = lca(root->right, p, q);
-        // If both left and right are non-NULL, the curr node is the LCA
+        //if both left and right are non-NULL, the curr node is the LCA
         if (left != NULL && right != NULL) {
             return root;
         }
@@ -20,7 +20,7 @@ TreeNode* lca(TreeNode* root, TreeNode* p, TreeNode* q) {
         return left != NULL ? left : right;
     }
     TreeNode* subtreeWithAllDeepest(TreeNode* root) {
-        if (!root) return 0; 
+        if(!root) return 0; 
         //lvl order
         vector<vector<TreeNode*>>res;
         queue<TreeNode*> q;//bfs to get nodes at each depth
@@ -43,9 +43,9 @@ TreeNode* lca(TreeNode* root, TreeNode* p, TreeNode* q) {
         }
         int n=res.size();
         vector<TreeNode*> lastlvl = res[n - 1];//get the deepest/last lvl
-        //if only one deepest node exists, it is the answer
+        //if only one deepest node exists, it is the ans
         if (lastlvl.size() == 1) return lastlvl[0];
-
+        
         //find LCA of all nodes in the last level
         TreeNode* lcaNode = lastlvl[0];
         //get LCA of all deepest nodes
