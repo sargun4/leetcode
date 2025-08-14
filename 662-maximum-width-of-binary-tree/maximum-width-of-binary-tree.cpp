@@ -1,13 +1,3 @@
-// #include <bits/stdc++.h>
-// using namespace std;
-// struct TreeNode {
-//    int val;
-//    TreeNode *left;
-//    TreeNode *right;
-//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-//    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-// };
 class Solution {
 public:
     typedef unsigned long long ll;
@@ -16,8 +6,8 @@ public:
         q.push({root,0});
         ll maxwidth=0;
         while(!q.empty()){
-            ll l=q.front().second;
-            ll r=q.back().second;
+            ll l=q.front().second;//lchild
+            ll r=q.back().second;//rchild
             maxwidth=max(maxwidth,r-l+1);
             int n=q.size();
             while(n--){
