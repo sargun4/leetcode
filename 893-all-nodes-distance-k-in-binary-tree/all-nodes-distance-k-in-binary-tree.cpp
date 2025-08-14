@@ -39,7 +39,7 @@ public:
         vector<int> ans;
         while(!q.empty()){
             int n=q.size();//no of nodes at curr lvl
-            if (currlvl == k) { //add the nodes at distance k to the result
+            if (currlvl == k) { //add the nodes at dist k to the result
                 for(int i=0;i<n;i++){
                     TreeNode* node = q.front();
                     q.pop();
