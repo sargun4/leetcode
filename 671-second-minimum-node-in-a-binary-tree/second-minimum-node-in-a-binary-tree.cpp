@@ -2,7 +2,6 @@ class Solution {
 public:
     int findSecondMinimumValue(TreeNode* root) {
         if (root == nullptr) return -1;
-
         set<int> values;
         queue<TreeNode*> q;
         q.push(root);
@@ -19,7 +18,7 @@ public:
         if (values.size() < 2) return -1;
 
         auto it = values.begin();
-        ++it; // Move iterator to second element
+        ++it; //Move iterator to 2nd elmnt
         return *it;
     }
 };
