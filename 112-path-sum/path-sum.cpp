@@ -2,7 +2,7 @@
 class Solution {
 public:
     bool hasPathSum(TreeNode* root, int target) {
-        if(root==NULL)//can't get any value even zero
+        if(!root)//can't get any value even 0
             return false;
         //BFS to store nodes, track of target
         queue<pair<TreeNode*,int>>q; //{node,sum}
@@ -10,7 +10,7 @@ public:
         q.push({root,target});
         while(!q.empty()){
             auto curr=q.front();
-            TreeNode *root=curr.first;
+            TreeNode* root=curr.first;
             target=curr.second;
             q.pop();
             //if there is no left and right child node must be a leaf node
@@ -28,8 +28,6 @@ public:
     }
 };
 
-// #include <bits/stdc++.h>
-// using namespace std;
 // class Solution {
 // public:
 //     bool inorder(TreeNode* root,int sum,int targetSum){
@@ -64,4 +62,3 @@ public:
 // //         return hasPathSum(root->left, targetSum - root->val) || hasPathSum(root->right, targetSum-root->val);
 // //     }
 // // };
-
