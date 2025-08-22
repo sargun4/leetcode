@@ -7,7 +7,7 @@ public:
          //If root is leaf then check the sum from root to leaf is less than limit or not
             // a. If less than limit then return NULL
             // B. else return root
-        if(!root->left  &&  !root->right) {
+        if(!root->left && !root->right) {
             if(sum + root->val < limit) {
                 return NULL;
             }else {
