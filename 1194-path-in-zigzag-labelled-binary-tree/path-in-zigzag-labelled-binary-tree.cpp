@@ -6,16 +6,16 @@ public:
         int val=1;
         bool rev = false;//is reversed flag
         //build tree until label is found
-        while (val <= label) {
-            int len =1<<tree.size();//2^lvl
+        while(val <= label) {
+            int len = 1<<tree.size();//size of each lvl= 2^lvl
             vector<int> lvl;
-            for(int i = 0; i < len;i++) {
+            for(int i=0;i<len;i++) {
                 lvl.push_back(val++);
             }
             if(rev)
                 reverse(lvl.begin(), lvl.end());
             tree.push_back(lvl);
-            rev=!rev;//reverse alt
+            rev=!rev;//reverse alt for zigzag
         }
         //find the path from root to label
         vector<int> path;//ans
