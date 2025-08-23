@@ -23,7 +23,7 @@ public:
                 }
             }
         }
-        if(ctr==n){ //visited all nodes-no cylce
+        if(ctr==n){//visited all nodes-no cylce
             return true;
         }
         return false;//cycle present in graph
