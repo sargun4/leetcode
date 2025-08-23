@@ -1,8 +1,5 @@
 // //KAHN's algo-bfs
 // // topo sort-only for DAG
- #include <bits/stdc++.h>
-using namespace std;
-
 class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
@@ -24,8 +21,7 @@ public:
         }
         //bfs
         while(!q.empty()){
-            int node = q.front();
-            q.pop();
+            int node = q.front(); q.pop();
             res.push_back(node);
         // Update indegrees and enqueue neighbors with indegree 0
             for(auto neigh :adj[node]){
@@ -38,7 +34,7 @@ public:
         // Check if a valid ordering exists
         if (res.size() == n) {
             return res;  // Valid ordering exists
-        } else {
+        }else{
             return {};  // Impossible to finish all tasks
         }
     }
