@@ -13,7 +13,7 @@ public:
             auto curr=q.front(); q.pop();
             string word=curr.first;
             int steps=curr.second;
-            if(word==endWord) return steps;
+            if(word==endWord) return steps;//shortest path found
             for(int i=0;i<word.size();i++){//for all chars in word
                 int originalChar=word[i];
                 for(char ch='a';ch<='z';ch++){
@@ -26,6 +26,6 @@ public:
                 word[i]=originalChar;//restore original char
             }
         }
-        return 0;
+        return 0;//no transfomation possible
     }
 };
