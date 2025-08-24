@@ -10,7 +10,6 @@ public:
     
         queue<pair<int,pair<int,int>>> q;//{no. of stops,{curr node,curr cost}}
         q.push({0,{src,0}});//start with the src node, 0 stops, and cost 0
-
         while(!q.empty()) {
             auto p = q.front(); q.pop();
             int stops = p.first; // no of stops made to reach the curr node
@@ -26,7 +25,7 @@ public:
                 int neigh=it.first;
                 if((stops<=k) && (cost+edgewt)<price[neigh]) {
                     price[neigh]=cost+edgewt;//update cost to reach adj node
-                    q.push({stops+1,{neigh,price[neigh]}});//push adj node into q with updated cost and stops
+                    q.push({stops+1,{neigh,price[neigh]}});//push adj node into q with updated cost and stops+1
                 }
             }
         }
