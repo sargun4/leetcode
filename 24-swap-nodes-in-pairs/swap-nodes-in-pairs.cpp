@@ -1,4 +1,3 @@
-
 class Solution {
 public:
     ListNode* revknodes(ListNode* head, int k) {
