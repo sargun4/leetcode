@@ -21,7 +21,7 @@ public:
         int m=board.size(); int n=board[0].size();
         if (m == 0 || n == 0) return;
         vector<vector<int>> vis(m,vector<int>(n,0));
-        //first, get all boundary 0s and their connected 0s
+        //first, get all boundary 0s and their connected Os
         for(int j=0;j<n;j++){//trav 1st row n last row
             if(!vis[0][j] && board[0][j]=='O'){//1st row
                 dfs(0,j,vis,board);
@@ -41,7 +41,7 @@ public:
         //flip all unvis 'O's to 'X's
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
-                //an internal O whoch ahdsnt been vis yet-convert it to X
+                //an internal O which hasnt been vis yet-convert it to X
                 if(!vis[i][j] && board[i][j]=='O'){
                     board[i][j]='X';
                 }
