@@ -11,13 +11,13 @@ public:
         }
         int eachBucketsNodes=L/k;
         int remainingNodes=L%k;
-        //2.create empty Bucket and fill it with nodes from the linked list
+        //2. create empty Bucket and fill it with nodes from the linked list
         vector<ListNode*> res(k,NULL);
         curr=head;
         ListNode* prev=NULL;
         for(int i=0;i<k;i++){
             res[i]=curr;
-            for(int ctr=1;ctr<= eachBucketsNodes+(remainingNodes>0?1:0);ctr++){
+            for(int ctr=1;ctr<=eachBucketsNodes+(remainingNodes>0?1:0);ctr++){
                 prev=curr;
                 curr=curr->next;
             }
