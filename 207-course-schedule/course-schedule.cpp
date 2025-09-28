@@ -1,13 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 class Solution {
-public:
+public: 
     //kahns algo- bfs- topo sort for DAG only
     bool toposort(unordered_map<int,vector<int>> &adj,int n,vector<int>&indegree){
         queue<int> q;
         int ctr=0;
         for(int i=0;i<n;i++){
-            if(indegree[i]==0) { 
+            if(indegree[i]==0){ 
                 q.push(i);
                 ctr++;
             }
