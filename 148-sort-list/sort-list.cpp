@@ -17,7 +17,6 @@ public:
     ListNode* mergeSortedLists(ListNode* p1, ListNode* p2) {
         ListNode dummy(0); // Dummy node to simplify code
         ListNode* curr = &dummy;
-
         while (p1 != NULL && p2 != NULL) {
             if (p1->val < p2->val) {
                 curr->next = p1;
