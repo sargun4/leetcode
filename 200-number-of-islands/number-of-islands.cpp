@@ -51,7 +51,7 @@ public:
             for(int j = 0; j <n; ++j) {
                 if(grid[i][j] == '1') {//land
                     ctr++;
-                    queue<pair<int, int>> q;//<row, col>
+                    queue<pair<int,int>> q;//<row, col>
                     grid[i][j] = '2';//mark as vis
                     q.push({i,j});
                     while(!q.empty()) {
