@@ -14,7 +14,7 @@ public:
                     for (int k = 0; k < 4; k++) {
                         int nr = i + dr[k];
                         int nc = j + dc[k];
-                        // If the new position is out of bounds or represents water (value is 0)
+                        //if the new position is out of bounds or represents water (value is 0)
                         // then it contributes 1 to the perimeter ctr
                         if (nr < 0 || nr >= m || nc < 0 || nc >= n || grid[nr][nc] == 0) {
                             ctr++;
